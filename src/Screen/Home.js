@@ -4,11 +4,11 @@ import VerticalNavBar from '../Components/Navigation/VerticalNavBar'
 export default function Home() {
 
   useEffect(() => {
-    document.getElementById('my_modal_1').showModal();
+    // document.getElementById('my_modal_1').showModal();
   }, []) 
 
   return (
-    <div>
+    <div className='h-full'>
       
       <Auth />
       <VerticalNavBar />
