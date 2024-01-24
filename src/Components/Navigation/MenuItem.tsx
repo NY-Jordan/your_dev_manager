@@ -5,12 +5,13 @@ import { PropsWithChildren, ReactElement, ReactNode } from 'react'
 type props = {
   title : string, 
   status : boolean, 
-  icon? : string
+  icon? : string,
+  default?: boolean
 }
 export default function Menu(props : PropsWithChildren<props>) {
   return (
-    <div tabIndex={0} className={props.status ? "collapse w-15" : "collapse w-full my-2"}>
-          <input type="radio"  name='navigation' className="peer" /> 
+    <div tabIndex={0}  className={props.status ? "collapse w-15" : "collapse w-full my-2"}>
+          <input type="radio" checked={props.default == true ? true : undefined} name='navigation' className="peer" /> 
           <div  style={{ padding :  props.status ? "0px" : "" }} className="collapse-title p-0  peer-hover:bg-gray-200 flex items-center justify-left   text-gray-content peer-checked:text-blue-500 ">
             {
               props.icon && <Icon
