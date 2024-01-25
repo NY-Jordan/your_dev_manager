@@ -21,7 +21,7 @@ export default function SubMenu(props : PropsWithChildren<props>) {
              <p style={{ display : props.status ? "none" : "block", marginLeft : "8px"}}> {props.title}</p>
           </div>
           {
-            props.children && <div className="collapse-content ml-5 text-gray-content "> 
+            props.children && <div className="collapse-content  text-gray-content "> 
             {props.children}
           </div>
           }

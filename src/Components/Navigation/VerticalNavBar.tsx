@@ -1,4 +1,4 @@
-import { mdiAccount, mdiArrowLeft, mdiArrowRight, mdiBookAccount, mdiBookArrowUp, mdiBookOpenBlankVariant, mdiBookOpenVariant, mdiCalendarBlankMultiple, mdiCodeTags, mdiLink, mdiPencilPlus } from '@mdi/js'
+import { mdiAccount, mdiArrowLeft, mdiArrowRight, mdiBookAccount, mdiBookArrowUp, mdiBookOpenBlankVariant, mdiBookOpenVariant, mdiCalendarBlankMultiple, mdiCodeTags, mdiLink, mdiPencilPlus, mdiPlus } from '@mdi/js'
 import Icon from '@mdi/react'
 import React, { useState } from 'react'
 import { motion } from "framer-motion"
@@ -15,10 +15,18 @@ export default function VerticalNavBar() {
         <div className='ml-2'>
           <Menu title='Dashboard'  icon={mdiAccount}   status={widthNavBar} default={true} />
           <Menu title='My Projects'   icon={mdiBookOpenVariant}  status={widthNavBar}>
-            <SubMenu title='Isiquest'   status={widthNavBar}/>
-            <SubMenu title='Social Group'   status={widthNavBar}  />
-                       
-              
+            <SubMenu title='Isiquest'   status={widthNavBar}>
+              <div className='flex flex-row items-center hover:bg-gray-100'>
+                  <Icon  path={mdiPlus} size={1} />
+                  <a href='#'>Add group task</a>
+                </div>
+            </SubMenu>
+            <SubMenu title='Social Group'   status={widthNavBar}  >
+                <div className='flex flex-row items-center hover:bg-gray-100'>
+                  <Icon  path={mdiPlus} size={1} />
+                  <a href='#'>Add group task</a>
+                </div>
+            </SubMenu> 
            </Menu>
             
           <Menu title='My Code Review'  icon={mdiCodeTags} status={widthNavBar}  />
