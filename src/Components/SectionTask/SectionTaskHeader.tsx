@@ -3,15 +3,16 @@ import Icon from '@mdi/react'
 import React from 'react'
 type props = {
     showMoreButton? : boolean,
-    name: string
+    name: string,
+    count : number
 }
-export default function SectionTaskHeader({showMoreButton, name}  : props) {
+export default function SectionTaskHeader({showMoreButton, name, count}  : props) {
   return (
     <div>
       <div className='flex flex-row justify-between' >
         <div className='flex flex-col'>
             <h5>{name}</h5>
-            <div className=' text-sm text-gray-500'>1 task</div>
+            <div className=' text-sm text-gray-500'>{count} task(s)</div>
         </div>
         <div className='flex flex-row  items-center space-x-2'>
             {
