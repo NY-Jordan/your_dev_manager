@@ -10,14 +10,14 @@ export default function Home() {
   }, []) 
 
   return (
-    <div className='h-full flex xflex-row'>
+    <div className='h-full flex flex-row'>
       
       <Auth />
     
       <VerticalNavBar  />
       <div style={{ width : "100%" }}>
       <NavBar />
-      <div className='flex flex-row p-4 space-x-8 mt-10'> 
+      <div className='flex flex-row  p-4 space-x-8 mt-10 ' style={{ minHeight : "100%", overflowY : "auto" }}> 
         <SectionTask showMoreButton={true} name='Backlog' />
         <SectionTask name='Started' />
         <SectionTask  name='in progress'  />

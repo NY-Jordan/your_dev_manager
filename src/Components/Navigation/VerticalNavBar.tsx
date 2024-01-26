@@ -9,7 +9,7 @@ import SubMenu from './SubMenu';
 export default function VerticalNavBar() {
   const [widthNavBar, setwidthNavBar] = useState(false);
   return (
-    <motion.div   animate={{width:  widthNavBar ? "5%" : "16%"  }}  className=' overflow-hidden h-screen  flex flex-col items-center  justify-center p-2 w-64 shadow-2xl  border-r-2 border-gray-400' >
+    <motion.div   animate={{width:  widthNavBar ? "5%" : "16%"  }}  className=' overflow-hidden  h-screen flex flex-col items-center  justify-center p-2 w-64 shadow-2xl  border-r-2 border-gray-400' >
         <ToggleVerticalNavBar  widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar}  />
         <img  src="https://dcassetcdn.com/design_img/1713797/63770/63770_9324745_1713797_1d1736c0_image.png" width={500}  />
         <div className='ml-2'>
