@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import SectionTaskHeader from './SectionTaskHeader'
 import SectionTaskCard from './SectionTaskCard'
 import { Reorder } from 'framer-motion'
+import AddTask from './AddTask'
 type props = {
     showMoreButton? : boolean,
     name: string,

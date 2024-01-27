@@ -1,6 +1,7 @@
 import { mdiDotsVertical, mdiMore, mdiPlus, mdiStarThreePoints } from '@mdi/js'
 import Icon from '@mdi/react'
 import React from 'react'
+import AddTask from './AddTask'
 type props = {
     showMoreButton? : boolean,
     name: string,
@@ -33,6 +34,7 @@ export default function SectionTaskHeader({showMoreButton, name, count}  : props
              </a>
         </div>
       </div>
+      
     </div>
   )
 }

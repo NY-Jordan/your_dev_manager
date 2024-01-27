@@ -24,6 +24,7 @@ export default function SectionTaskCard({item, position, color} :  {item : strin
              whileHover={animation }
             className={"card my-2 overflow-hidden  h-40 border-2 bg-base-100 shadow-xl "} style={{ bottom  : top }}>
             <div className='card-title m-0 p-0 justify-between'>
+                <span  style={{ backgroundColor : color }} className=" ml-4 rounded-sm mt-2 p-2"></span>
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className=" m-1">
                         <a href='#' className='hover:bg-gray-200 rounded'>
@@ -43,7 +44,6 @@ export default function SectionTaskCard({item, position, color} :  {item : strin
                         </li>
                     </ul>
                 </div>
-                <span  style={{ backgroundColor : color }} className=" mr-4 rounded-sm mt-2 p-2"></span>
             </div>
             <div className="card-body pb-0">
                 <h2 className="text-md font-bold">Task title</h2>
