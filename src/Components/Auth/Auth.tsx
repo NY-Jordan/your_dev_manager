@@ -10,7 +10,7 @@ export default function Auth() {
     const [isVisible, setVisible] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
   return (
-    <div>
+    <div >
         <dialog id="my_modal_1" className="modal backdrop-blur-sm">
             <Login 
                 isVisible={isVisible} 

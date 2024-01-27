@@ -1,39 +1,43 @@
-import { mdiAccount, mdiArrowLeft, mdiArrowRight, mdiBookAccount, mdiBookArrowUp, mdiBookOpenBlankVariant, mdiBookOpenVariant, mdiCalendarBlankMultiple, mdiCodeTags, mdiLink, mdiPencilPlus, mdiPlus } from '@mdi/js'
+import { mdiAccount, mdiArrowLeft, mdiArrowRight, mdiBookAccount, mdiBookArrowUp, mdiBookOpenBlankVariant, mdiBookOpenVariant, mdiCalendarBlankMultiple, mdiCodeTags, mdiContacts, mdiHelp, mdiLink, mdiPencilPlus, mdiPlus } from '@mdi/js'
 import Icon from '@mdi/react'
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { motion } from "framer-motion"
 import ToggleVerticalNavBar from './ToggleVerticalNavBar';
-import Menu from './MenuItem';
 import SubMenu from './SubMenu';
+import DropDownMenuItem from './DropDownMenuItem';
+import MenuItem from './MenuItem';
+type props  = {
+  widthNavBar : boolean,
+  setwidthNavBar  : Dispatch<SetStateAction<boolean>>,
+}
 
-export default function VerticalNavBar() {
-  const [widthNavBar, setwidthNavBar] = useState(false);
+export default function VerticalNavBar({widthNavBar,setwidthNavBar} : props) {
+ 
   return (
-    <motion.div   animate={{width:  widthNavBar ? "5%" : "16%"  }}  className=' h-screen flex flex-col items-center mt-40  p-2 w-64 shadow-2xl  border-r-2 border-gray-400' >
-        <ToggleVerticalNavBar  widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar}  />
-        <div className='ml-2'>
-          <Menu title='Dashboard'  icon={mdiAccount}   status={widthNavBar} default={true} />
-          <Menu title='My Projects'   icon={mdiBookOpenVariant}  status={widthNavBar}>
+    <motion.div   animate={{width:  widthNavBar ? "5%" : "16%"  }}  className=' h-screen bg-white flex flex-col items-center pt-20 overflow-y-auto no-scrollbar p-2 w-64 shadow-2xl  border-r-2 border-gray-400' >
+        <ToggleVerticalNavBar  widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar}  /> 
+          <ul className="menu  rounded-box">
+          <MenuItem title='Dashboard' goTo='/' icon={mdiAccount}   status={widthNavBar} default={true} />
+          <DropDownMenuItem title='My Projects'   icon={mdiBookOpenVariant}  status={widthNavBar}>
             <SubMenu title='Isiquest'   status={widthNavBar}>
-              <div className='flex flex-row items-center hover:bg-gray-100'>
-                  <Icon  path={mdiPlus} size={1} />
-                  <a href='#'>Add group task</a>
-                </div>
+              <MenuItem title='Add group task'  goTo='/projects'  icon={mdiPlus}   status={false}  />
             </SubMenu>
             <SubMenu title='Social Group'   status={widthNavBar}  >
-                <div className='flex flex-row items-center hover:bg-gray-100'>
-                  <Icon  path={mdiPlus} size={1} />
-                  <a href='#'>Add group task</a>
-                </div>
+              <MenuItem   goTo='/projects' title='Add group task'  icon={mdiPlus}   status={false} />
             </SubMenu> 
-           </Menu>
+           </DropDownMenuItem>
             
-          <Menu title='My Code Review'  icon={mdiCodeTags} status={widthNavBar}  />
+          <MenuItem  goTo='/dodereview' title='My Code Review'  icon={mdiCodeTags} status={widthNavBar}  />
           
-          <Menu title='Notes' status={widthNavBar}  icon={mdiPencilPlus}  />
-          <Menu title='Links Bag'  status={widthNavBar}  icon={mdiLink}  />
-          <Menu title='Calendar' status={widthNavBar} icon={mdiCalendarBlankMultiple}  />
-        </div>
+          <MenuItem  goTo='/notes' title='Notes' status={widthNavBar}  icon={mdiPencilPlus}  />
+          <MenuItem   goTo='/linksbag' title='Links Bag'  status={widthNavBar}  icon={mdiLink}  />
+          <MenuItem  goTo='/calendar' title='Calendar' status={widthNavBar} icon={mdiCalendarBlankMultiple}  />
+          <div className="menu pt-40 rounded-box">
+            <MenuItem  goTo='/' title='Help' status={widthNavBar}  icon={mdiHelp}  />
+            <MenuItem   goTo='/' title='join us'  status={widthNavBar}  icon={mdiContacts}  />
+          </div>
+          </ul>
+          
     </motion.div>
   )
 }

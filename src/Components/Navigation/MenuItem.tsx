@@ -1,31 +1,37 @@
-import { mdiAccount } from '@mdi/js'
 import Icon from '@mdi/react'
-import { PropsWithChildren, ReactElement, ReactNode } from 'react'
+import React, { PropsWithChildren } from 'react'
+import { motion } from "framer-motion"
+import { useLocation, useNavigate } from 'react-router-dom'
 
 type props = {
-  title : string, 
-  status : boolean, 
-  icon? : string,
-  default?: boolean
-}
-export default function Menu(props : PropsWithChildren<props>) {
+    title : string, 
+    status : boolean, 
+    icon? : string,
+    default?: boolean,
+    goTo : string
+  }
+
+export default function MenuItem(props : PropsWithChildren<props>) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const key  = location.key;
+  function handleClick() {
+     if (props.goTo != location.pathname) {
+      navigate(props.goTo);
+     }
+    
+  }
+
   return (
-    <div tabIndex={0}  className={props.status ? "collapse w-15" : "collapse w-full my-2"}>
-          <input type="radio" checked={props.default == true ? true : undefined} name='navigation' className="peer" /> 
-          <div  style={{ padding :  props.status ? "0px" : "" }} className="collapse-title p-0  peer-hover:bg-gray-200 flex items-center justify-left   text-gray-content peer-checked:text-blue-500 ">
-            {
-              props.icon && <Icon
-              path={props.icon}
-              size={3/2}
-               />
-            }
-             <p style={{ display : props.status ? "none" : "block", marginLeft : "8px"}}> {props.title}</p>
-          </div>
-          {
-            props.children && <div className="collapse-content ml-5 text-gray-content "> 
-            {props.children}
-          </div>
-          }
-    </div>
+      <motion.li  animate={{ width : props.status ? 2 :  "100%"  }} className={ 'hover:bg-gray-200 '+(props.status  ? 'rounded-full' : '')} >   
+        <a onClick={handleClick}>
+        {
+            props.icon && <Icon
+            path={props.icon}
+            size={1}
+            />
+        }
+        <p style={{ display : props.status ? "none" : "block"}}>{props.title}</p></a>
+        </motion.li >
   )
 }
