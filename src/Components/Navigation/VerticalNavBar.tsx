@@ -14,9 +14,9 @@ type props  = {
 export default function VerticalNavBar({widthNavBar,setwidthNavBar} : props) {
  
   return (
-    <motion.div   animate={{width:  widthNavBar ? "5%" : "16%"  }}  className=' h-screen bg-white flex flex-col items-center pt-20 overflow-y-auto no-scrollbar p-2 w-64 shadow-2xl  border-r-2 border-gray-400' >
+    <motion.div   animate={{width:  widthNavBar ? "5%" : "16%"  }}  className='px-2 h-screen bg-white flex flex-col items-left pt-20 overflow-y-auto no-scrollbar p-2 w-64 shadow-2xl  border-r-2 border-gray-400' >
         <ToggleVerticalNavBar  widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar}  /> 
-          <ul className="menu  rounded-box">
+          <ul className="menu px-0 rounded-box">
           <MenuItem title='Dashboard' goTo='/' icon={mdiAccount}   status={widthNavBar} default={true} />
           <DropDownMenuItem title='My Projects'   icon={mdiBookOpenVariant}  status={widthNavBar}>
             <SubMenu title='Isiquest'   status={widthNavBar}>

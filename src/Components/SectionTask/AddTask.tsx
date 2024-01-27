@@ -1,17 +1,34 @@
 import { mdiBookEdit, mdiClose, mdiFileEdit, mdiLinkEdit, mdiNoteEdit, mdiPencil, mdiPlus } from '@mdi/js'
 import Icon from '@mdi/react'
-import React from 'react'
+import React, { useState } from 'react'
 import Tag from '../Tag'
+import { motion, useDragControls } from "framer-motion"
+import ReactHotKey from 'react-shortcut'
+
 
 export default function AddTask() {
+    const controls = useDragControls();
+    const [DragListener, setDragListenner] = useState(false)
+    const [displayAddTask, setDisplayAddTask] = useState(false)
+    const doSomethingOnShortcutPress = () => {
+        setDisplayAddTask(true);
+    }
   return (
-    <div  className="absolute  border-2 shadow-xl bg-white rounded-b-xl" style={{ top : "12%",left : "60%", width : "500px" }}>
+    <>
+    <motion.div  
+        animate={{cursor : DragListener ? "pointer" : "", display : displayAddTask ? "block" : 'none' }}
+        onMouseLeave={() => setDragListenner(false)} 
+        onMouseDown={() => setDragListenner(true)}  
+        drag 
+        dragListener={DragListener} 
+        dragControls={controls} 
+        className="absolute  z-[100] border-2 shadow-xl bg-white rounded-b-xl" style={{ top : "12%",left : "60%", width : "500px" }}>
         <div className='bg-blue-400 p-2  flex flex-row justify-between  items-center rounded-t-xl text-white' >
             <div className='flex flex-row  items-center space-x-2 '>
                 <Icon path={mdiFileEdit} size={2} />
                 <h5 className='text-lg font-bold'>Add a new Task</h5>
             </div>
-            <button className='btn bg-blue-400'>
+            <button className='btn bg-blue-400' onClick={() => setDisplayAddTask(false)}>
                 <Icon path={mdiClose} size={1} />
             </button>
         </div>
@@ -123,8 +140,14 @@ export default function AddTask() {
         </div>
         <div className='bg-blue-400 p-2 py-4  flex flex-row justify-center items-center rounded-b-xl text-white' >
             <p>Create a new task </p>
-            <p className='ml-2 text-gray-700 text-sm'> or CRTL + ENTER</p>
+            <p className='ml-2 text-gray-700 text-sm'> or press  N</p>
         </div>
-    </div>
+    </motion.div>
+    <ReactHotKey 
+    keys='n'
+    onKeysPressed={doSomethingOnShortcutPress}
+    />
+    </>
+    
   )
 }
