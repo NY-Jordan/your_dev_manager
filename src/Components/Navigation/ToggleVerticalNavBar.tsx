@@ -21,7 +21,6 @@ export default function ToggleVerticalNavBar({widthNavBar, setwidthNavBar} : pro
                horizontal
                vertical
                color="gray"
-               
                /> :
                <Icon 
                path={mdiArrowRight}
