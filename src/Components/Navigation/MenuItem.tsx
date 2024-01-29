@@ -31,7 +31,7 @@ export default function MenuItem(props : PropsWithChildren<props>) {
             size={1}
             />
         }
-        <p style={{ display : props.status ? "none" : "block"}}>{props.title}</p></a>
+        <p style={{ display : props.status ? "none" : "block",  overflow : 'hidden'}}>{props.title}</p></a>
         </motion.li >
   )
 }

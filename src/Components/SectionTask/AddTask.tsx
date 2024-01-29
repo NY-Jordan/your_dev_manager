@@ -4,6 +4,10 @@ import React, { useState } from 'react'
 import Tag from '../Tag'
 import { motion, useDragControls } from "framer-motion"
 import ReactHotKey from 'react-shortcut'
+import AddTaskDetails from './AddTaskDetails'
+import AddTaskTools from './AddTaskTools'
+import ReminderDateModal from '../AddTask/ReminderDateModal'
+import FilesAttachedModal from '../AddTask/FilesAttachedModal'
 
 
 export default function AddTask() {
@@ -11,7 +15,7 @@ export default function AddTask() {
     const [DragListener, setDragListenner] = useState(false)
     const [displayAddTask, setDisplayAddTask] = useState(false)
     const doSomethingOnShortcutPress = () => {
-        setDisplayAddTask(true);
+        setDisplayAddTask(!displayAddTask);
     }
   return (
     <>
@@ -35,41 +39,10 @@ export default function AddTask() {
         <div className='bg-white w-full rounded-b-xl p-2'>
             <form className='px-4 w-full mt-2'>
                 {/* start task details */}
-                <div>
-                    <div className='flex flex-row justify-between '>
-                            
-                            <div >
-                                    <div className='link text-sm link-primary'><a href='#'>3 files attached</a></div>
-                            </div>
-                            <div className='flex flex-row mb-2' >
-                                <div className='font-bold  text-blue-500 text-sm mr-2'>Reminder date  : </div>
-                                <div className='font-bold   text-sm '> 05 decembre 2023</div>
-                                <a href='#'  className='hover:bg-gray-200 ml-2 rounded-xl '>
-                                    <Icon
-                                    path={mdiPencil}
-                                    color={'black'}
-                                    size={3/4}
-                                    />
-                                </a>
-                            </div>
-                    </div>
-                    <div className='flex flex-row justify-between '>
-                        <div >
-                            <div className='font-bold   text-sm text-blue-400'>Tag(s)</div>
-                            </div>
-                    </div>
-                    <div className='grid mb-6 mt-2  grid-cols-4  gap-2'>
-                        <Tag text='back-end'/>
-                        <Tag text='front-end' />
-                        <Tag text='full-stack' />
-                        <Tag text='full-stack' />
-                        <Tag text='full-stack' />
-                        <Tag text='full-stack' />
-                        <Tag text='full-stack' />
-                        
-                    </div>
-                </div>
-            {/* end task details */}
+                <AddTaskDetails />
+                <ReminderDateModal />
+                <FilesAttachedModal />
+                {/* end task details */}
                {/* start form field */}
                 <label className="form-control w-full ">
                     <div className="label">
@@ -101,38 +74,7 @@ export default function AddTask() {
                 {/* end form field */}
                 {/* start add tools */}
 
-                <div className='flex flex-row justify-between w-full'>
-                    <div className='mt-4 flex flex-row items-center space-x-2'>
-                        <button className="btn  btn-xs bg-blue-500 btn-square hover:bg-blue-400 rounded-lg	"> 
-                        <Icon 
-                        path={mdiPlus}
-                        color={"white"}
-                        size={1}
-                        />
-                        </button>
-                        <p className='text-sm text-blue-800'>Add a tag</p>
-                    </div>
-                    <div className='mt-4 flex flex-row items-center space-x-2'>
-                        <button className="btn  btn-xs bg-blue-500 btn-square hover:bg-blue-400 rounded-lg	"> 
-                        <Icon 
-                        path={mdiPlus}
-                        color={"white"}
-                        size={1}
-                        />
-                        </button>
-                        <p className='text-sm text-blue-800'>Add a reminder date</p>
-                    </div>
-                    <div className='mt-4 flex flex-row items-center space-x-2'>
-                        <button className="btn  btn-xs bg-blue-500 btn-square hover:bg-blue-400 rounded-lg	"> 
-                        <Icon 
-                        path={mdiFileEdit}
-                        color={"white"}
-                        size={1}
-                        />
-                        </button>
-                        <p className='text-sm text-blue-800'>Attach a file</p>
-                    </div>
-                </div>
+                <AddTaskTools />
                 <button className='btn mt-4 hover:bg-blue-400 w-full'>Submit</button>
                 {/* end add tools */}
             </form>

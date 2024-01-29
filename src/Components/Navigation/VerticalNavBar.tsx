@@ -20,7 +20,8 @@ export default function VerticalNavBar({widthNavBar,setwidthNavBar} : props) {
           <MenuItem title='Dashboard' goTo='/' icon={mdiAccount}   status={widthNavBar} default={true} />
           <DropDownMenuItem title='My Projects'   icon={mdiBookOpenVariant}  status={widthNavBar}>
             <SubMenu title='Isiquest'   status={widthNavBar}>
-              <MenuItem title='Add group task'  goTo='/projects'  icon={mdiPlus}   status={false}  />
+                <MenuItem title='Add group task'  goTo='/projects'  icon={mdiPlus}   status={false}  />
+                <MenuItem title='Authentification'  goTo='/projects'   status={false}  />
             </SubMenu>
             <SubMenu title='Social Group'   status={widthNavBar}  >
               <MenuItem   goTo='/projects' title='Add group task'  icon={mdiPlus}   status={false} />
