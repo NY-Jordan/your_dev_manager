@@ -3,6 +3,9 @@ import Icon from '@mdi/react'
 import React from 'react'
 
 export default function ReminderDateModal() {
+    const sampleFunction = (a: number, b: number): string => {
+        return (a + b).toString();
+    };
   return (
     <>
         <input type="checkbox" id="reminder_date" className="modal-toggle" />

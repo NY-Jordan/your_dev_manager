@@ -28,7 +28,7 @@ export default function VerticalNavBar({widthNavBar,setwidthNavBar} : props) {
             </SubMenu> 
            </DropDownMenuItem>
             
-          <MenuItem  goTo='/dodereview' title='My Code Review'  icon={mdiCodeTags} status={widthNavBar}  />
+          <MenuItem  goTo='/codereview' title='My Code Review'  icon={mdiCodeTags} status={widthNavBar}  />
           
           <MenuItem  goTo='/notes' title='Notes' status={widthNavBar}  icon={mdiPencilPlus}  />
           <MenuItem   goTo='/linksbag' title='Links Bag'  status={widthNavBar}  icon={mdiLink}  />
