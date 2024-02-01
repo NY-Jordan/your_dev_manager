@@ -8,7 +8,8 @@ type props = {
     status : boolean, 
     icon? : string,
     default?: boolean,
-    goTo : string
+    goTo : string,
+    isSubMenu? : boolean
   }
 
 export default function MenuItem(props : PropsWithChildren<props>) {
@@ -23,7 +24,9 @@ export default function MenuItem(props : PropsWithChildren<props>) {
   }
 
   return (
-      <motion.li  animate={{ width : props.status ? 2 :  "100%"  }} className={ 'hover:bg-gray-200 '+(props.status  ? 'rounded-full' : '')} >   
+      <motion.li whileHover={{ 
+        
+       }}  animate={{ width : props.status ? 2 :  "100%",  }} className={ 'hover:bg-gray-200 '+(props.status  ? 'rounded-full' : '')+(props.default  ? 'bg-blue-200' : '')} >   
         <a onClick={handleClick}>
         {
             props.icon && <Icon

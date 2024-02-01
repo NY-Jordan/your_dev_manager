@@ -5,7 +5,7 @@ import CodeReviewTabs from '../Components/CodeReview/CodeReviewTabs'
 export default function CodeReview() {
   return (
     <Layout>
-        <div className='h-full bg-white'>
+        <div className='h-screen bg-white'>
             <div className='py-10 mx-2'>
                 <CodeReviewTabs />
             </div>

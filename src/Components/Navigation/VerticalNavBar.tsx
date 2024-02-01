@@ -1,4 +1,4 @@
-import { mdiAccount, mdiArrowLeft, mdiArrowRight, mdiBookAccount, mdiBookArrowUp, mdiBookOpenBlankVariant, mdiBookOpenVariant, mdiCalendarBlankMultiple, mdiCodeTags, mdiContacts, mdiHelp, mdiLink, mdiPencilPlus, mdiPlus } from '@mdi/js'
+import { mdiAccount, mdiArrowLeft, mdiArrowRight, mdiBookAccount, mdiBookArrowUp, mdiBookOpenBlankVariant, mdiBookOpenVariant, mdiCalendarBlankMultiple, mdiCodeTags, mdiContacts, mdiHandPointingRight, mdiHelp, mdiLink, mdiPencilPlus, mdiPlus } from '@mdi/js'
 import Icon from '@mdi/react'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { motion } from "framer-motion"
@@ -21,7 +21,8 @@ export default function VerticalNavBar({widthNavBar,setwidthNavBar} : props) {
           <DropDownMenuItem title='My Projects'   icon={mdiBookOpenVariant}  status={widthNavBar}>
             <SubMenu title='Isiquest'   status={widthNavBar}>
                 <MenuItem title='Add group task'  goTo='/projects'  icon={mdiPlus}   status={false}  />
-                <MenuItem title='Authentification'  goTo='/projects'   status={false}  />
+                <MenuItem title='Authentification'  icon={mdiHandPointingRight}   goTo='/projects'   status={false}   isSubMenu={true}  />
+                <MenuItem title='gestion des utilisateurs'   icon={mdiHandPointingRight}  goTo='/projects'   status={false}  isSubMenu={true} />
             </SubMenu>
             <SubMenu title='Social Group'   status={widthNavBar}  >
               <MenuItem   goTo='/projects' title='Add group task'  icon={mdiPlus}   status={false} />
