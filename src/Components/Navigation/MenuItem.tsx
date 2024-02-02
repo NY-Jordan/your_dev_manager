@@ -1,6 +1,6 @@
 import Icon from '@mdi/react'
 import React, { PropsWithChildren } from 'react'
-import { motion } from "framer-motion"
+import { delay, motion } from "framer-motion"
 import { useLocation, useNavigate } from 'react-router-dom'
 
 type props = {
@@ -24,17 +24,21 @@ export default function MenuItem(props : PropsWithChildren<props>) {
   }
 
   return (
-      <motion.li whileHover={{ 
-        
-       }}  animate={{ width : props.status ? 2 :  "100%",  }} className={ 'hover:bg-gray-200 '+(props.status  ? 'rounded-full' : '')+(props.default  ? 'bg-blue-200' : '')} >   
-        <a onClick={handleClick}>
-        {
-            props.icon && <Icon
-            path={props.icon}
-            size={1}
-            />
-        }
-        <p style={{ display : props.status ? "none" : "block",  overflow : 'hidden'}}>{props.title}</p></a>
+      <motion.li 
+        whileHover={{ 
+          transform  :  props.isSubMenu ? 'translate(20px)' :  'translate(0)'
+        }}
+        animate={{ width : props.status ? 2 :  "100%",  }} 
+        className={ 'hover:bg-gray-200 '+(props.status  ? 'rounded-full' : '')+(props.default  ? 'bg-blue-200' : '')} >   
+          <a onClick={handleClick}>
+          {
+              props.icon && <Icon
+              path={props.icon}
+              size={1}
+              />
+          }
+            <p style={{ display : props.status ? "none" : "block",  overflow : 'hidden'}}>{props.title}</p>
+          </a>
         </motion.li >
   )
 }

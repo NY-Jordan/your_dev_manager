@@ -18,7 +18,6 @@ export default function Layout({children}) {
       <VerticalNavBar   widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar} />
       <motion.div style={{  width : "86%" }} animate={{ width : widthNavBar ? "95%" :  '86%'}}  transition={{ delay: 0.01 }} >
       <NavBar  />
-     
         {children}
       </motion.div>
     </motion.div>
