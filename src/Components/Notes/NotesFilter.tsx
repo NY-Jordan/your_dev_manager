@@ -11,7 +11,7 @@ export default function NotesFilter() {
        <div>
         <div className='my-2'>Color Filter</div>
             {
-                colors.map((color) => <ColorPoint colors={color} />)
+                colors.map((color, key) => <ColorPoint  key={key} colors={color} />)
             }
         </div>
       </div>

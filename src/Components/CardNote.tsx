@@ -2,9 +2,9 @@ import { mdiDelete, mdiPencil } from '@mdi/js'
 import Icon from '@mdi/react'
 import React from 'react'
 
-export default function CardNote() {
+export default function CardNote({color} : {color : string}) {
   return (
-    <div className='bg-red-200  rounded-lg h-25 p-2'>
+    <div className='rounded-lg h-25 p-2' style={{ backgroundColor : color }}>
       <div className='flex flex-col' >
         <div className='text-md font-bold text-gray-400' >24 janvuer 2022 à 10:06</div>
         {/* <div className='flex flex-row space-x-2'>
