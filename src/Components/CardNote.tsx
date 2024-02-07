@@ -1,26 +1,24 @@
 import { mdiDelete, mdiPencil } from '@mdi/js'
 import Icon from '@mdi/react'
+import { motion } from "framer-motion"
 import React from 'react'
 
 export default function CardNote({color} : {color : string}) {
   return (
-    <div className='rounded-lg h-25 p-2' style={{ backgroundColor : color }}>
+    <motion.a  className='h-25' href='#'>
+      <motion.div whileHover={{ scale : 1.1, transition: { duration: 0.5}}}  
+     
+      className='rounded-lg  p-2' style={{ backgroundColor : color }}>
       <div className='flex flex-col' >
-        <div className='text-md font-bold text-gray-400' >24 janvuer 2022 à 10:06</div>
-        {/* <div className='flex flex-row space-x-2'>
-            <a href='#'>
-                <Icon path={mdiPencil} color={'red'} size={1} />
-            </a>
-            <a href='#'>
-                <Icon path={mdiDelete} color={'red'} size={1} />
-            </a>
-        </div> */}
+        <div className='text-md font-bold text-gray-400' >Notes Title</div>
+        <div className='text-sm font-bold'>24 Jan 2022 10:06</div>
       </div>
       <div className='mt-4'>
-        <div className='text-white text-lg'>
-            Le lorem ipsum est, en imprimerie, une suite de mots
+        <div className='text-white text-sm'>
+            Le lorem ipsum est, en imprimerie, une suite de mots...
         </div>
       </div>
-    </div>
+      </motion.div>
+    </motion.a>
   )
 }
