@@ -5,18 +5,19 @@ import SectionTask from '../Components/SectionTask/SectionTask'
 import VerticalNavBar from '../Components/Navigation/VerticalNavBar'
 import { task } from '../data/task'
 import { motion } from "framer-motion"
+import { useResponsive } from '../Hooks/useResponsive'
 
 export default function Layout({children}) {
-
+  const {isDesktopOrLaptop } = useResponsive();
   useEffect(() => {
     //document.getElementById('my_modal_1').showModal();
   }, []) 
   const [widthNavBar, setwidthNavBar] = useState(false);
   return (
-    <motion.div  className='h-full flex flex-row  bg-slate-100'>
+    <motion.div  className='h-full flex flex-row  bg-slate-100' style={{ overflowX : "hidden", overflowY : 'hidden' }}>
       <Auth />
-      <VerticalNavBar   widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar} />
-      <motion.div style={{  width : "86%" }} animate={{ width : widthNavBar ? "95%" :  '86%'}}  transition={{ delay: 0.01 }} >
+     {isDesktopOrLaptop && <VerticalNavBar   widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar} />}
+      <motion.div  animate={{ width : isDesktopOrLaptop ?  ( widthNavBar ? "95%" :  '86%')  : "100%"}}  transition={{ delay: 0.01 }} >
         <NavBar  />
         {children}
         <div className='relative   text-gray-400' style={{  left : "40%" }}>
