@@ -17,8 +17,11 @@ export default function Layout({children}) {
       <Auth />
       <VerticalNavBar   widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar} />
       <motion.div style={{  width : "86%" }} animate={{ width : widthNavBar ? "95%" :  '86%'}}  transition={{ delay: 0.01 }} >
-      <NavBar  />
+        <NavBar  />
         {children}
+        <div className='relative   text-gray-400' style={{  left : "40%" }}>
+          created by Yvan Jordan Nguetse @ 2024-2025
+        </div>
       </motion.div>
     </motion.div>
   )

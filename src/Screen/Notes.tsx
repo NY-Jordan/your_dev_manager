@@ -31,7 +31,7 @@ export default function Notes() {
                   }
             </div>
           </div>
-          <div className='h-full flex justify-end items-center' style={{ width : '20%', overflow : "scroll" }}>
+          <div className='h-full flex justify-end items-center' style={{ width : '30%', overflow : "scroll" }}>
             <NotesFilter />
           </div>
         </div>
