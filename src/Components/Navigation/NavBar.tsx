@@ -1,11 +1,34 @@
 import React from 'react'
+import { useResponsive } from '../../Hooks/useResponsive'
+import Icon from '@mdi/react';
+import { mdiHamburger, mdiMenu, mdiMenuUp } from '@mdi/js';
+import VerticalNavBarContains from './VerticalNavBarContains';
 
 export default function NavBar() {
+  const {isTabletOrMobile} = useResponsive();
   return (
     <div className="navbar bg-blue-500">
-  <div className="navbar-start">
-    <a className="btn btn-ghost text-xl text-white">Your Dev Manager</a>
-  </div>
+      <div className="navbar-start">
+        {isTabletOrMobile ?  
+        <div className="drawer">
+          < input id="my-drawer" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content">
+            {/* Page content here */}
+            <label htmlFor="my-drawer" className="btn btn-ghost text-white drawer-button"><Icon path={mdiMenu} size={2} /></label>
+          </div> 
+          <div className="drawer-side z-50">
+              <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+              <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                {/* Sidebar content here */}
+                <div className='text-4xl mb-10'>DevHandle</div>
+                <VerticalNavBarContains />
+                
+              </ul>
+          </div>
+        </div>
+        : 
+        <a className="btn btn-ghost text-xl text-white">Your Dev Manager</a>}
+      </div>
   <div className="navbar-center">
   </div>
   <div className="navbar-end">
