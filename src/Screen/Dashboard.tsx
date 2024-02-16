@@ -14,8 +14,8 @@ import { useResponsive } from '../Hooks/useResponsive';
 export default function Dashboard() {
   const {isTabletOrMobile, isSM} = useResponsive();
   return (
-      <Layout>
-            <div className='px-10 '  style={{ height : "100%", overflowX : 'hidden', overflowY : 'scroll' }}>
+      
+            <div className='px-10 '>
                 <div className={'flex justify-between mt-4 mb-2 ' + (isTabletOrMobile ? 'flex-col space-y-4' : '' )}>
                     <div>
                       <h1 className='text-2xl'>Dasboard</h1>
@@ -50,8 +50,8 @@ export default function Dashboard() {
                     </div>
                     <div className='ml-6'>
                       <Range value={25} title='speed of delivery a project' />
-                      <Range value={50} title='speed of delivery a group task' />
-                      <Range value={80} title='speed of delivery a simple task' />
+                      <Range value={80} title='speed of delivery a group task' />
+                      <Range value={40} title='speed of delivery a simple task' />
                     </div>
                   </div>
                   
@@ -60,6 +60,6 @@ export default function Dashboard() {
                
 
             </div>
-      </Layout>
+      
   )
 }

@@ -13,7 +13,7 @@ export default function Notes() {
   const colorsPackage = useAppSelector((state) => state.colorsPackage);
   
   return (
-    <Layout>
+    
         <div className='h-full w-full flex '>
           <div className='w-full h-full pt-10'>
             <div className='mx-4 flex flex-row items-center'>
@@ -35,6 +35,6 @@ export default function Notes() {
             <NotesFilter />
           </div>
         </div>
-    </Layout>
+    
   )
 }

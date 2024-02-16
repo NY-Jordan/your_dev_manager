@@ -1,23 +1,40 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } from "react-router-dom";
 import Home from '../Screen/Home';
 import Dashboard from '../Screen/Dashboard';
 import Projects from '../Screen/Projects';
 import CodeReview from '../Screen/CodeReview';
 import Notes from '../Screen/Notes';
+import Layout from '../Screen/Layout';
 
 
 export default function Navigation() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Dashboard />,
+        },
+        {
+          path: "/projects",
+          element: <Projects />,
+        },
+        {
+          path: "/codereview",
+          element: <CodeReview />,
+        },
+        {
+          path: "/notes",
+          element: <Notes />,
+        },
+      ],
+    },
+  ]);
   return (
-    <BrowserRouter>
-        <Routes >
-            <Route path="/" element={<Dashboard />} /> 
-            <Route path="/projects"  name="projects"   element={<Projects />} /> 
-            <Route path="/codereview"  element={<CodeReview />} /> 
-            <Route path="/notes"  element={<Notes />} /> 
-            <Route path="/"  element={<Notes />} /> 
-            <Route path="/"  element={<Home />} /> 
-        </Routes>
-    </BrowserRouter>
+    
+    <RouterProvider router={router} />
   )
 }

@@ -5,7 +5,7 @@ import { codereviews } from '../../data/codereview'
 
 export default function PublicCodeReview() {
   return (
-    <div role="tabpanel" style={{  overflowY : "auto" }} className="tab-content h-full  bg-base-100 border-base-300 rounded-box p-6">
+    <div role="tabpanel" style={{  overflowY : "auto" }} className="tab-content   bg-base-100 border-base-300 rounded-box p-6">
         <CodeReviewFilter />
         <div className='grid mb-6 mt-8  grid-cols-2 gap-6' >
            {

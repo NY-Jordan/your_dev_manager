@@ -26,8 +26,8 @@ export default function VerticalNavBarContains({widthNavBar} : {widthNavBar? : b
           <MenuItem   goTo='/linksbag' title='Links Bag'  status={withVerticalNav}  icon={mdiLink}  />
           <MenuItem  goTo='/calendar' title='Calendar' status={withVerticalNav} icon={mdiCalendarBlankMultiple}  />
           <div className="menu pt-40 rounded-box">
-            <MenuItem  goTo='/' title='Help' status={withVerticalNav}  icon={mdiHelp}  />
-            <MenuItem   goTo='/' title='join us'  status={withVerticalNav}  icon={mdiContacts}  />
+            <MenuItem  goTo='/help' title='Help' status={withVerticalNav}  icon={mdiHelp}  />
+            <MenuItem   goTo='/joinus' title='join us'  status={withVerticalNav}  icon={mdiContacts}  />
           </div>
           </ul>
   )

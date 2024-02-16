@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { motion } from "framer-motion"
 export default function Range({value, title} :  {value : number, title : string}) {
     const speedDeveliryRange = value;
-    const subForPercent =  speedDeveliryRange < 60 ? 1 : 2;
+    const subForPercent =  speedDeveliryRange < 50 ? 1 : 3;
     const iconSpeedDeveliryRange =  (speedDeveliryRange-subForPercent)+"%";
     const colorSpeedDelevryRange =  speedDeveliryRange < 30 ?'range-error' : (speedDeveliryRange >= 30 && speedDeveliryRange <= 60  ? 'range-warning' : "range-success");
     const iconSpeedDelevryRange =  speedDeveliryRange < 30 ?'😡' : (speedDeveliryRange >= 30 && speedDeveliryRange <= 60  ? '😄' : "😌");

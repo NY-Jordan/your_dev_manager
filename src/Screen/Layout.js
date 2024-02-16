@@ -6,8 +6,9 @@ import VerticalNavBar from '../Components/Navigation/VerticalNavBar'
 import { task } from '../data/task'
 import { motion } from "framer-motion"
 import { useResponsive } from '../Hooks/useResponsive'
+import { Outlet } from "react-router-dom";
 
-export default function Layout({children}) {
+export default function Layout() {
   const {isDesktopOrLaptop } = useResponsive();
   useEffect(() => {
     //document.getElementById('my_modal_1').showModal();
@@ -19,7 +20,9 @@ export default function Layout({children}) {
      {isDesktopOrLaptop && <VerticalNavBar   widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar} />}
       <motion.div  animate={{ width : isDesktopOrLaptop ?  ( widthNavBar ? "95%" :  '86%')  : "100%"}}  transition={{ delay: 0.01 }} >
         <NavBar  />
-        {children}
+        <div style={{ overflow  : "auto" }}>
+             <Outlet />
+        </div>
         <div className='relative   text-gray-400' style={{  left : "40%" }}>
           created by Yvan Jordan Nguetse @ 2024-2025
         </div>

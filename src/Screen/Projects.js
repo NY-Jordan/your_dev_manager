@@ -9,7 +9,7 @@ import Layout from './Layout'
 export default function Projects() {
 
   return (
-    <Layout>
+    
        <div className='flex flex-row overflow-y-auto  p-4 space-x-8 mt-10 ' > 
           <SectionTask showMoreButton={true} name='Backlog'  data={task.backlog} />
           <SectionTask name='Started' data={task.started} />
@@ -17,6 +17,6 @@ export default function Projects() {
           <SectionTask  name='Done' data={task.done}/>
           <AddTask />
         </div>
-    </Layout>
+    
   )
 }
