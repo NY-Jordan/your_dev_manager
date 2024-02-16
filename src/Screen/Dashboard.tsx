@@ -15,7 +15,7 @@ export default function Dashboard() {
   const {isTabletOrMobile, isSM} = useResponsive();
   return (
       
-            <div className='px-10 '>
+            <div className='px-10 '  style={{ overflowX : 'hidden', overflowY : 'auto' }}>
                 <div className={'flex justify-between mt-4 mb-2 ' + (isTabletOrMobile ? 'flex-col space-y-4' : '' )}>
                     <div>
                       <h1 className='text-2xl'>Dasboard</h1>

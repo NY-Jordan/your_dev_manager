@@ -14,8 +14,8 @@ export default function Notes() {
   
   return (
     
-        <div className='h-full w-full flex '>
-          <div className='w-full h-full pt-10'>
+        <div className='w-full h-full flex '>
+          <div className=' pt-10'>
             <div className='mx-4 flex flex-row items-center'>
               <div className='text-2xl'>My Bloc Notes__</div>
               <div>

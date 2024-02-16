@@ -20,7 +20,7 @@ export default function Layout() {
      {isDesktopOrLaptop && <VerticalNavBar   widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar} />}
       <motion.div  animate={{ width : isDesktopOrLaptop ?  ( widthNavBar ? "95%" :  '86%')  : "100%"}}  transition={{ delay: 0.01 }} >
         <NavBar  />
-        <div style={{ overflow  : "auto" }}>
+        <div className='h-full' style={{ overflow  : "auto" }}>
              <Outlet />
         </div>
         <div className='relative   text-gray-400' style={{  left : "40%" }}>
