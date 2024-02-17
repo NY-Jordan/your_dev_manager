@@ -3,11 +3,12 @@ import DropDownMenuItem from './DropDownMenuItem'
 import MenuItem from './MenuItem'
 import SubMenu from './SubMenu'
 import { mdiAccount, mdiBookOpenVariant, mdiCalendarBlankMultiple, mdiCodeTags, mdiContacts, mdiHandPointingRight, mdiHelp, mdiLink, mdiPencilPlus, mdiPlus } from '@mdi/js'
-
+import logo from './../../assets/img/logo.png'
 export default function VerticalNavBarContains({widthNavBar} : {widthNavBar? : boolean}) {
     const withVerticalNav = widthNavBar ? widthNavBar : false;
   return (
     <ul className="menu px-0 rounded-box">
+            
           <MenuItem title='Dashboard' goTo='/' icon={mdiAccount}   status={withVerticalNav} default={true} />
           <DropDownMenuItem title='My Projects'   icon={mdiBookOpenVariant}  status={withVerticalNav}>
             <SubMenu title='Isiquest'   status={withVerticalNav}>

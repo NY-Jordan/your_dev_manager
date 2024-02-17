@@ -13,7 +13,6 @@ export default function CodeReviewFilter() {
       </div>
       <div className='flex flex-row space-x-2'>
 
-       
         <select className="select select-sm w-100 select-bordered  ">
             <option disabled selected>Choose a language</option>
             <option >Javascript</option>

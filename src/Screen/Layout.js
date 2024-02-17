@@ -15,16 +15,13 @@ export default function Layout() {
   }, []) 
   const [widthNavBar, setwidthNavBar] = useState(false);
   return (
-    <motion.div  className='h-full flex flex-row  bg-slate-100' style={{ overflowX : "hidden", overflowY : 'hidden' }}>
+    <motion.div  className='flex flex-row  bg-slate-100' style={{ overflowX : "hidden", overflowY : 'hidden' }}>
       <Auth />
      {isDesktopOrLaptop && <VerticalNavBar   widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar} />}
       <motion.div  animate={{ width : isDesktopOrLaptop ?  ( widthNavBar ? "95%" :  '86%')  : "100%"}}  transition={{ delay: 0.01 }} >
         <NavBar  />
-        <div className='h-full' style={{ overflow  : "auto" }}>
+        <div className='h-screen flex-1' style={{ overflowY  : "auto", overflowX : 'hidden' }}>
              <Outlet />
-        </div>
-        <div className='relative   text-gray-400' style={{  left : "40%" }}>
-          created by Yvan Jordan Nguetse @ 2024-2025
         </div>
       </motion.div>
     </motion.div>

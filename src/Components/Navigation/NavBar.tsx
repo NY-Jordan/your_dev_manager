@@ -7,7 +7,7 @@ import VerticalNavBarContains from './VerticalNavBarContains';
 export default function NavBar() {
   const {isTabletOrMobile} = useResponsive();
   return (
-    <div className="navbar bg-blue-500">
+    <div className="navbar  bg-blue-500">
       <div className="navbar-start">
         {isTabletOrMobile ?  
         <div className="drawer">
