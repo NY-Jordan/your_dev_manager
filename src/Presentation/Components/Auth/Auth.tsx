@@ -13,7 +13,7 @@ export default function Auth() {
     const userToken = getCookie('token');
     let [searchParams, setSearchParams] = useSearchParams();
     let [limitedToken, setLimitedToken] = useState<string | number | boolean | object | null>(secureLocalStorage.getItem('limited_token'));
-    const [isAuth, setIsAuth] = useState<boolean>(false)
+    const [isAuth, setIsAuth] = useState<boolean>(true)
     const [isVisible, setVisible] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
     const [emailVerification, setEmailVerification] = useState<boolean>((searchParams.get('auth') && limitedToken)? true : false);
@@ -23,21 +23,17 @@ export default function Auth() {
         navigate("/?auth=email_verification");
       }
       
-    }, [])
+    }, []);
 
 
     useEffect(() => {
-      if (userToken) {
-        setIsAuth(true);
+      if (!userToken) {
+        setIsAuth(false);
       }
-      console.log(secureLocalStorage.getItem('connexion_greetings'));
-      
-
       if (secureLocalStorage.getItem('connexion_greetings')) {
         toast.success('Good to see you', {
           duration: 4000,
           icon: '👋🏼',});
-  
         secureLocalStorage.removeItem('connexion_greetings');
       }
     }, []) 
@@ -46,7 +42,6 @@ export default function Auth() {
   return (
     <div >
       <input type="checkbox" id="my_modal_6" checked={!isAuth}  className="modal-toggle" />
-
         <dialog id="my_modal_6" className="modal backdrop-blur-sm">
             <Login 
                 isVisible={isVisible} 

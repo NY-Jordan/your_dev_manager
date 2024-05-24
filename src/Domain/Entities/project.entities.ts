@@ -1,6 +1,9 @@
 export interface  ProjectInterface  {
-    id : number,
-    username : string,
-    email : string,
-    picture : string
+    created_at: Date
+    delevry_at? : Date|null
+    id: number,
+    name: string
+    updated_at: string
+    user_id: Number
 } 
+

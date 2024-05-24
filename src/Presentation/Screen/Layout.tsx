@@ -10,7 +10,6 @@ import { Outlet } from "react-router-dom";
 import secureLocalStorage from 'react-secure-storage'
 import  useCookie,  { getCookie } from 'react-use-cookie'
 import toast, { Toaster } from 'react-hot-toast'
-import { notification } from '../../echo'
 import CustomToaster from '../Components/Toaster/CustomToaster'
 
 
@@ -18,10 +17,7 @@ export default function Layout() {
   const {isDesktopOrLaptop } = useResponsive();
   
 
-  useEffect(() => {
-    /* notification(); */
-  })
-
+ 
   
   const [widthNavBar, setwidthNavBar] = useState(false);
   return (

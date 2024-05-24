@@ -1,8 +1,9 @@
 import Echo from 'laravel-echo';
 import secureLocalStorage from 'react-secure-storage';
-import Pusher from "pusher-js"
-
-window.Pusher = Pusher;
+import  "pusher-js"
+import { getCurrentUser } from './Application/Helpers/Actions';
+import { UserInterface } from './Domain/Entities/user.entities';
+import { handleNotification } from './Infrastructure/Broadcast/Notification';
 
 
 const options = {
@@ -20,23 +21,11 @@ const options = {
     },
   },
 };
+const user   =  getCurrentUser();
+export const echo  = new Echo(options); 
 
 
-const echo = new Echo(options); 
-
-
-export function notification() {
-  
-  var pusher = new Pusher('eb065acbe5ce3ae21e43', {
-    cluster: 'sa1'
-  });
-
-  var channel = pusher.subscribe('App.Models.User.' + secureLocalStorage.getItem('user').id);
-  console.log(channel);
-  channel.bind ('notification', function(data) {
-    console.log(data);
-  });
-  
-}
-
-
+echo.private('App.Models.User.' + user?.id)
+    .notification((notification  ) => {
+      handleNotification(notification);
+});

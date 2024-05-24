@@ -23,13 +23,18 @@ export async function logout(){
   secureLocalStorage.clear();
 }
 
-export  function getCurrentUser() {
-  return secureLocalStorage.getItem('user');
+export  function getCurrentUser() : object|null {
+  const userObject = secureLocalStorage.getItem('user');
+   if (typeof userObject === 'object') {
+      return   userObject
+   }
+   return null;
 }
-
 
 export function handleResetPassword(){
   setCookie('reset_password_sucess', 'true', {
     Secure: process.env.NODE_ENV === 'production',
   });
 }
+
+

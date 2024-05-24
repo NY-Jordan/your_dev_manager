@@ -7,20 +7,13 @@ import NewCollaborator from './Modals/NewCollaborator';
 import secureLocalStorage from 'react-secure-storage';
 import { getCookie } from 'react-use-cookie';
 import { getAllProjects } from '../../Infrastructure/Services/ProjectService';
+import { ProjectInterface } from '../../Domain/Entities/project.entities';
 
-type Project = {
-    created_at: Date
-    delevry_at? : Date|null
-    id: number,
-    name: string
-    updated_at: string
-    user_id: Number
-}
 
 export default function TableProjects() {
-    const dispatch  = useAppDispatch();
-    const projectsState = useAppSelector((state) => state.projects);
-    const [activeNewCollaboratorModal, setActiveNewCollaboratorModal] = useState<boolean>(false)
+    const projectsState = useAppSelector(state => state.projects);
+    const [activeNewCollaboratorModal, setActiveNewCollaboratorModal] = useState<boolean>(false);
+    const [projects, setProjects] = useState<Array<ProjectInterface>>([]);
 
     useEffect(() => {
         if (getCookie('token')) {
@@ -28,7 +21,10 @@ export default function TableProjects() {
         }
     }, []);
 
-
+    useEffect(() => {
+        setProjects(projectsState.projects);
+    }, [projectsState.projects]);
+    
   return (
     <div className="overflow-x-auto" style={{ width : "100%" }}>
         
@@ -46,7 +42,7 @@ export default function TableProjects() {
             <tbody>
             
 
-            { projectsState.projects && projectsState.projects.map((value : Project, key:  number) =>  <tr  className='hover:bg-slate-200' key={key}>
+            {projects && projects.map((value : ProjectInterface, key:  number) =>  <tr  className='hover:bg-slate-200' key={key}>
                     <td className='text-center '>{value.name}</td>
                     <td className='text-center'>{(new Date(value.created_at)).toDateString()}</td>
                     <td className='text-center'>{value.delevry_at?.toString() ? (new Date(value.delevry_at)).toDateString()  : "-"}</td>

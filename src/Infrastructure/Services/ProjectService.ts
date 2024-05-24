@@ -3,7 +3,7 @@ import ApiClient from "../../Application/Helpers/ApiClient";
 import secureLocalStorage from "react-secure-storage";
 import { SetStateAction, Dispatch } from "react";
 import { store } from "../../Application/Store/store";
-import { getProjectFailed, getProjectSucess } from "../../Application/Actions/ProjectActions";
+import { CreateProjectFailed, CreateProjectSucess, DeleteProjectFailed, DeleteProjectSucess, SearchUserProjectFailed, SearchUserProjectSucess, SendInvitationFailed, SendInvitationSucess, getProjectFailed, getProjectSucess } from "../../Application/Actions/ProjectActions";
 
 
 export async function CreateNewProject (name :string)  {
@@ -13,18 +13,17 @@ export async function CreateNewProject (name :string)  {
    },
    {
         headers : {
-            Authorization : 'Bearer '+secureLocalStorage.getItem('token')
+            Authorization : 'Bearer '+ secureLocalStorage.getItem('token')
         }
    }
    )
    .then(async (response)  => {
        const res = response.data;
        if (response.status === 200) {
-           /* setStatus(200); */
+           store.dispatch(CreateProjectSucess(200))
        }   
    }).catch(async (e)  => { 
-       console.log(e.response.status);
-       /* setStatus(400);  */
+       store.dispatch(CreateProjectFailed(400))
    })   
    
 };
@@ -55,12 +54,13 @@ export async function SearchUsers (search : string|number|null, projectId : numb
              Authorization : 'Bearer '+secureLocalStorage.getItem('token')
          }
     }).then((response) => {
-      
         const res = response.data;
         if (response.status === 200) {
-           /*  setResult(res.users) */
+            const users = res.users;
+           store.dispatch(SearchUserProjectSucess(users));
         }   
     }).catch((e) => { 
+        store.dispatch(SearchUserProjectFailed('ERROR ERROR'));
     }) 
 }
 
@@ -75,13 +75,33 @@ export async function SendInvitationToUser(userId : number,projectId : number) {
     }).then((response) => {
         const res = response.data;
         if (response.status === 201) {
-            /* setStatus(201) */
+            store.dispatch(SendInvitationSucess(userId,projectId,200))
         }   
     }).catch((e) => { 
+        console.log(e.response.status);
+        
         if(e.response.status === 412){
-           /*  setStatus(412); */
+            store.dispatch(SendInvitationFailed(userId,projectId,412))
         }else {
-           /*  setStatus(400); */
+            store.dispatch(SendInvitationFailed(userId,projectId,400))
         }
+    }) 
+}
+
+
+export async function DeleteProjectService(projectId : number) {
+    ApiClient().post('/project/delete/'+projectId,  
+    {},
+    {
+        headers : {
+            Authorization : 'Bearer '+secureLocalStorage.getItem('token')
+        }
+    }).then((response) => {
+        const res = response.data;
+        if (response.status === 201) {
+            store.dispatch(DeleteProjectSucess());
+        }   
+    }).catch((e) => { 
+        store.dispatch(DeleteProjectFailed());
     }) 
 }

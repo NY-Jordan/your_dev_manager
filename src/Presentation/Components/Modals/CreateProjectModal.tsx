@@ -4,6 +4,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { CreateNewProject } from '../../../Infrastructure/Services/ProjectService'
+import { useAppSelector } from '../../../Application/Store/hook'
 
 type Inputs = {
   name: string
@@ -15,26 +16,27 @@ export default function CreateProjectModal({active, setActive} : {active : boole
         handleSubmit,
         watch,
         formState: { errors },
-    } = useForm<Inputs>()
-    const [creationStatus, setCreationStatus] = useState<number>(0)
+    } = useForm<Inputs>();
+    
+    const CreateProJectStatus = useAppSelector(state => state.projects).create_project_status
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        const result  =  CreateNewProject(data.name);
+      CreateNewProject(data.name);
     }
 
     React.useEffect(() => {
-        if (creationStatus === 200) {
+      console.log(CreateProJectStatus);
+      
+        if (CreateProJectStatus === 200) {
           setActive(false);
           toast.success('New Project Created');
-          setCreationStatus(0);
 
         }
-        if (creationStatus === 400) {
+        if (CreateProJectStatus === 400) {
           setActive(false);
           toast.error('Something went wrong');
-          setCreationStatus(0);
         }
-    }, [creationStatus]);
+    }, [CreateProJectStatus]);
 
   return (
     <>

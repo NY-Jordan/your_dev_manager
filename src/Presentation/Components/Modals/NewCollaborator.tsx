@@ -3,31 +3,25 @@ import Icon from '@mdi/react'
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import CollaboratorSearch from '../CollaboratorSearch'
 import { SearchUsers } from '../../../Infrastructure/Services/ProjectService'
+import { UserInterface } from '../../../Domain/Entities/user.entities'
+import { useAppSelector } from '../../../Application/Store/hook'
 
-
-type User   =  {
-  id: number,
-    name: string,
-    picture: string
-    email: string,
-    email_verified_at: Date,
-    status: number,
-    created_at: Date,
-    updated_at: Date
-}
 
 export default function NewCollaborator({active, setActive, projectId} : {active : boolean, setActive :   Dispatch<SetStateAction<boolean>>, projectId : number}) {
-  const [search, setSearch] = useState<string>('');
-  const [result, setResult] = useState<Array<User>>();
+  const [search, setSearch] = useState<string|null>(null);
+  const projectUserState = useAppSelector(state => state.projectUserSearch);
   useEffect(() => {
-    if (search?.length > 0) {
-      SearchUsers(search, projectId);
-    }    
-  }, [search])
+    if (active) {
+      if (search !== null) {
+        SearchUsers(search, projectId);
+      } 
+    }
+      
+  }, [search]);
 
   return (
     <>
-      <input type="checkbox" id="create_project_modal"  checked={active} className="modal-toggle w-full" />
+      <input type="checkbox" id={"create_project_modal"}  checked={active} className="modal-toggle w-full" />
         <dialog className="modal backdrop-blur-sm modal-top justify-center" role="dialog">
           <div className="modal-box  rounded-lg   mt-4" style={{width : '800px'}}>
               <div className='flex justify-between'>
@@ -44,9 +38,9 @@ export default function NewCollaborator({active, setActive, projectId} : {active
                 </label>
                 <div className='border-gray-100 border-2 w-full my-4 p-2 rounded-md shadow-lg'>
                   <div className='max-h-[300px] overflow-y-auto overflow-x-hidden'>
-                        {result ?
-                          result?.map((item) => {
-                            return <CollaboratorSearch name={item.name} picture={item.picture} projectId={projectId} userId={item.id} />
+                        {projectUserState.users ?
+                          projectUserState.users?.map((item : UserInterface, key : number) => {
+                            return <CollaboratorSearch key={key} name={item.name} picture={item.picture} projectId={projectId} userId={item.id} />
                           })
                            :
                            <div className='text-xl text-center py-14' >Search Your Collaborator</div>
