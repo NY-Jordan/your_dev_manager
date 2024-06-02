@@ -12,9 +12,10 @@ export async function getAllNotification ()  {
    })
    .then((response) => {
        const res = response.data;
+       
        if (response.status === 200) {
             const data = res.data
-           store.dispatch(getNotificationsSucess(data.data));
+           store.dispatch(getNotificationsSucess(data));
        }   
    }).catch((e) => { 
         store.dispatch(getNotificationsFailed());

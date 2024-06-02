@@ -5,28 +5,41 @@ import CollaboratorSearch from '../CollaboratorSearch'
 import { SearchUsers } from '../../../Infrastructure/Services/ProjectService'
 import { UserInterface } from '../../../Domain/Entities/user.entities'
 import { useAppSelector } from '../../../Application/Store/hook'
+import { AES, enc } from 'crypto-js'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 
-export default function NewCollaborator({active, setActive, projectId} : {active : boolean, setActive :   Dispatch<SetStateAction<boolean>>, projectId : number}) {
+export default function NewCollaborator({active, setActive} : {active : boolean, setActive :   Dispatch<SetStateAction<boolean>>}) {
   const [search, setSearch] = useState<string|null>(null);
   const projectUserState = useAppSelector(state => state.projectUserSearch);
+  let [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const href  = searchParams.get('href');
+  const projectId = href ? AES.decrypt(href, 'newCollab243-').toString(enc.Utf8) : '';
+
   useEffect(() => {
     if (active) {
-      if (search !== null) {
-        SearchUsers(search, projectId);
+      if (search !== null && projectId.length) {
+        SearchUsers(search, parseInt(projectId));
       } 
     }
       
   }, [search]);
+  
+  function handleClose () {
+    setActive(false);
+    navigate(location.pathname);
+  }
 
-  return (
+  return (  
     <>
       <input type="checkbox" id={"create_project_modal"}  checked={active} className="modal-toggle w-full" />
         <dialog className="modal backdrop-blur-sm modal-top justify-center" role="dialog">
           <div className="modal-box  rounded-lg   mt-4" style={{width : '800px'}}>
               <div className='flex justify-between'>
               <h3 className="font-bold text-lg">Invite a new collaborator on the Project</h3>
-              <a href='#'  onClick={() => setActive(false)} className='hover:bg-gray-200 rounded-full'>
+              <a href='#'  onClick={() => handleClose()} className='hover:bg-gray-200 rounded-full'>
                 <Icon path={mdiClose}  size={1}/>
               </a>
               </div>
@@ -40,7 +53,7 @@ export default function NewCollaborator({active, setActive, projectId} : {active
                   <div className='max-h-[300px] overflow-y-auto overflow-x-hidden'>
                         {projectUserState.users ?
                           projectUserState.users?.map((item : UserInterface, key : number) => {
-                            return <CollaboratorSearch key={key} name={item.name} picture={item.picture} projectId={projectId} userId={item.id} />
+                            return <CollaboratorSearch key={key} name={item.name} picture={item.picture} projectId={parseInt(projectId)} userId={item.id} />
                           })
                            :
                            <div className='text-xl text-center py-14' >Search Your Collaborator</div>

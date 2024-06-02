@@ -3,7 +3,8 @@ import ApiClient from "../../Application/Helpers/ApiClient";
 import secureLocalStorage from "react-secure-storage";
 import { SetStateAction, Dispatch } from "react";
 import { store } from "../../Application/Store/store";
-import { CreateProjectFailed, CreateProjectSucess, DeleteProjectFailed, DeleteProjectSucess, SearchUserProjectFailed, SearchUserProjectSucess, SendInvitationFailed, SendInvitationSucess, getProjectFailed, getProjectSucess } from "../../Application/Actions/ProjectActions";
+import { AcceptProjectInvitationFailed, AcceptProjectInvitationSucess, CreateProjectFailed, CreateProjectSucess, DeleteProjectFailed, DeleteProjectSucess, RefuseProjectInvitationFailed, RefuseProjectInvitationSucess, SearchUserProjectFailed, SearchUserProjectSucess, SendInvitationFailed, SendInvitationSucess, getProjectFailed, getProjectSucess } from "../../Application/Actions/ProjectActions";
+import { ProjectInvitationInterface } from "../../Domain/Entities/project.entities";
 
 
 export async function CreateNewProject (name :string)  {
@@ -42,6 +43,8 @@ export async function getAllProjects ()  {
            store.dispatch(getProjectSucess(data.projects, data.count));
        }   
    }).catch((e) => { 
+    console.log(e);
+    
         store.dispatch(getProjectFailed('Somethings went wrong'));
    })   
    
@@ -78,13 +81,47 @@ export async function SendInvitationToUser(userId : number,projectId : number) {
             store.dispatch(SendInvitationSucess(userId,projectId,200))
         }   
     }).catch((e) => { 
-        console.log(e.response.status);
-        
         if(e.response.status === 412){
             store.dispatch(SendInvitationFailed(userId,projectId,412))
         }else {
             store.dispatch(SendInvitationFailed(userId,projectId,400))
         }
+    }) 
+}
+
+
+export async function acceptProjectInvitation(uuid : string|number) {
+    ApiClient().post('/project/invite/user/accept/'+uuid,  
+    {},
+    {
+        headers : {
+            Authorization : 'Bearer '+secureLocalStorage.getItem('token')
+        }
+    }).then((response) => {
+        const res = response.data;
+        if (response.status === 200) {
+            store.dispatch(AcceptProjectInvitationSucess(uuid))
+        }   
+    }).catch((e) => { 
+        store.dispatch(AcceptProjectInvitationFailed());
+        
+    }) 
+}
+
+export async function refuseProjectInvitation(uuid : string|number) {
+    ApiClient().post('/project/invite/user/reject/'+uuid,  
+    {},
+    {
+        headers : {
+            Authorization : 'Bearer '+secureLocalStorage.getItem('token')
+        }
+    }).then((response) => {
+        const res = response.data;
+        if (response.status === 200) {
+            store.dispatch(RefuseProjectInvitationSucess(uuid))
+        }   
+    }).catch((e) => { 
+        store.dispatch(RefuseProjectInvitationFailed());
     }) 
 }
 
@@ -104,4 +141,21 @@ export async function DeleteProjectService(projectId : number) {
     }).catch((e) => { 
         store.dispatch(DeleteProjectFailed());
     }) 
+}
+
+
+export async function getProjectInvitation(uuid : string|number) : Promise<ProjectInvitationInterface|null>   {
+    try {
+        const response  = await ApiClient().get('/project/invite/'+uuid,
+        {
+            headers : {
+                Authorization : 'Bearer '+secureLocalStorage.getItem('token')
+            }
+        })
+        const res =  response.data.data;
+       return res;
+    } catch (error) {
+        return null;
+    }
+    
 }

@@ -10,7 +10,7 @@ type Inputs = {
   name: string
 }
 
-export default function CreateProjectModal({active, setActive} : {active : boolean, setActive :   Dispatch<SetStateAction<boolean>>,}) {
+export default function SetProjectModal({active, setActive} : {active : boolean, setActive :   Dispatch<SetStateAction<boolean>>}) {
       const {
         register,
         handleSubmit,
@@ -21,21 +21,8 @@ export default function CreateProjectModal({active, setActive} : {active : boole
     const CreateProJectStatus = useAppSelector(state => state.projects).create_project_status
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-      CreateNewProject(data.name);
+      /* CreateNewProject(data.name); */
     }
-
-    React.useEffect(() => {
-        if (CreateProJectStatus === 200) {
-          setActive(false);
-          toast.success('New Project Created');
-          getAllProjects();
-
-        }
-        if (CreateProJectStatus === 400) {
-          setActive(false);
-          toast.error('Something went wrong');
-        }
-    }, [CreateProJectStatus]);
 
   return (
     <>
@@ -43,18 +30,18 @@ export default function CreateProjectModal({active, setActive} : {active : boole
         <div className="modal backdrop-blur-sm" role="dialog">
         <div className="modal-box modal-top">
             <div className='flex justify-between'>
-            <h3 className="font-bold text-lg">Create a New Project</h3>
+            <h3 className="font-bold text-lg">Update Project's Name</h3>
             <a href='#'  onClick={() => setActive(false)} className='hover:bg-gray-200 rounded-full'>
               <Icon path={mdiClose}  size={1}/>
             </a>
             </div>
-            <p className="py-4">Enter the name of the project</p>
+            <p className="py-4">Project's Name</p>
             <form method='post'  onSubmit={handleSubmit(onSubmit)}>
                 <input  className={'input input-bordered w-full '+(errors.name ? 'input-secondary' : '')} placeholder="Project's Name" 
                 {...register("name", { required: true })}
                  />
                 <div className='flex justify-end mt-4'>
-                  <button className='btn btn-primary w-ful'>Create</button>
+                  <button className='btn btn-primary w-ful'>Update</button>
                 </div>
             </form>
         </div>

@@ -1,3 +1,6 @@
 export enum NotificationEnum {
-    invitation = 'notification.invitaion'
+    invitation = 'INVITATION',
+    invitation_confirmation ='INVITATION_CONFIRMATION',
+    invitation_accepted = 'INVITATION_ACCEPTED',
+    invitation_refused = 'INVITATION_REFUSED'
 }

@@ -3,7 +3,6 @@ import { getCookie } from 'react-use-cookie';
 
 
 const ApiClient = () => {
-    console.log(getCookie('X-CSRF-TOKEN'));
     const API_SERVER_URL = process.env.REACT_APP_BASE_URL_API_REQUEST;
     const axiosInstance = axios.create({
         baseURL  : API_SERVER_URL,
@@ -25,8 +24,7 @@ const ApiClient = () => {
                 config.method == 'delete'
                 /* other methods you want to add here */
             ) && !getCookie('X-CSRF-TOKEN')) {
-            return setCSRFToken()
-                .then(response => config).catch((e) => {  console.log(e); });
+            return setCSRFToken().then(response => config);
         }
         return config;
     }

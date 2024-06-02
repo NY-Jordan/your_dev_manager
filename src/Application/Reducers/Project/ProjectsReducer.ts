@@ -12,6 +12,14 @@ const initialState = {
         project_id : null,
         status : null
     },
+    accept_invitation_status : {
+        uuid : null,
+        status : null
+    },
+    refuse_invitation_status : {
+        uuid : null,
+        status : null
+    },
     message :  '',
 }
 
@@ -45,6 +53,28 @@ const  ProjectsReducer = (state = initialState, action : ActionInterface) => {
 
     case ProjectActions.DELETE_PROJECT_FAILED : 
         return {...state, delete_project_status : false }
+
+    case ProjectActions.ACCEPT_PROJECT_INVITATION_SUCESS : 
+        return {...state, accept_invitation_status : {uuid : action.payload.uuid,status : true } }
+
+    case ProjectActions.ACCEPT_PROJECT_INVITATION_FAILED : 
+        return {...state, accept_invitation_status : { uuid : action.payload.uuid,status : false }
+        }
+
+    case ProjectActions.INIT_PROJECT_INVITATION : 
+        return {...state, accept_invitation_status : { uuid : null,status : null }
+    }
+
+    case ProjectActions.REFUSE_PROJECT_INVITATION_SUCESS : 
+        return {...state, refuse_invitation_status : {uuid : action.payload.uuid,status : true } }
+
+    case ProjectActions.REFUSE_PROJECT_INVITATION_FAILED : 
+        return {...state, refuse_invitation_status : { uuid : action.payload.uuid,status : false }
+        }
+        
+    case ProjectActions.INIT_REFUSE_PROJECT_INVITATION : 
+        return {...state, refuse_invitation_status : { uuid : null,status : null }
+    }
         
     default:
         return {...state};

@@ -8,12 +8,22 @@ import secureLocalStorage from 'react-secure-storage';
 import { getCookie } from 'react-use-cookie';
 import { getAllProjects } from '../../Infrastructure/Services/ProjectService';
 import { ProjectInterface } from '../../Domain/Entities/project.entities';
+import Loader from './Loader/Loader';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AES } from 'crypto-js';
+import SetProjectModal from './Modals/SetProjectModal';
 
 
 export default function TableProjects() {
     const projectsState = useAppSelector(state => state.projects);
     const [activeNewCollaboratorModal, setActiveNewCollaboratorModal] = useState<boolean>(false);
+    const [activeSetProject, SetActiveSetProject] = useState<boolean>(false);
     const [projects, setProjects] = useState<Array<ProjectInterface>>([]);
+    const navigate = useNavigate();
+    const location  = useLocation();
+
+
+
 
     useEffect(() => {
         if (getCookie('token')) {
@@ -24,11 +34,24 @@ export default function TableProjects() {
     useEffect(() => {
         setProjects(projectsState.projects);
     }, [projectsState.projects]);
+
+    const handleNewCollaborator = (projectId : number) => {
+        setActiveNewCollaboratorModal(true);
+        const key = AES.encrypt(JSON.stringify(projectId.toString()), 'newCollab243-').toString();
+        navigate(location.pathname+'?href='+key);
+    }
+
+
+    const handleUpdateProject = (projectId : number) => { 
+        SetActiveSetProject(true)
+        const key = AES.encrypt(JSON.stringify(projectId.toString()), 'setCollab243-').toString();
+        navigate(location.pathname+'?href='+key);
+    }
     
   return (
     <div className="overflow-x-auto" style={{ width : "100%" }}>
-        
-        <table className="table">
+       
+        {projects.length > 0 ? <table className="table">
             {/* head */}
             <thead>
             <tr className='bg-slate-100'>
@@ -42,7 +65,7 @@ export default function TableProjects() {
             <tbody>
             
 
-            {projects && projects.map((value : ProjectInterface, key:  number) =>  <tr  className='hover:bg-slate-200' key={key}>
+            {projects  && projects.map((value : ProjectInterface, key:  number) =>  <tr  className='hover:bg-slate-200' key={key}>
                     <td className='text-center '>{value.name}</td>
                     <td className='text-center'>{(new Date(value.created_at)).toDateString()}</td>
                     <td className='text-center'>{value.delevry_at?.toString() ? (new Date(value.delevry_at)).toDateString()  : "-"}</td>
@@ -51,7 +74,7 @@ export default function TableProjects() {
                             <Icon path={mdiDelete} size={3/4} color={'red'} />
                         </a>
 
-                        <a href='#' className='tooltip rounded-full hover:bg-slate-100 p-2' data-tip="edit">
+                        <a href='#'  onClick={() => handleUpdateProject(value.id)} className='tooltip rounded-full hover:bg-slate-100 p-2' data-tip="edit">
                             <Icon path={mdiPencil} size={3/4}  />
                         </a>
 
@@ -59,16 +82,20 @@ export default function TableProjects() {
                             <Icon path={mdiAccount} size={3/4}  />
                         </a>
 
-                        <a href='#' onClick={() => setActiveNewCollaboratorModal(true)} className=' tooltip rounded-full hover:bg-slate-100 p-2' data-tip="invite a collaborator">
+                        <a  onClick={() => handleNewCollaborator(value.id)} className=' tooltip rounded-full hover:bg-slate-100 p-2 hover:cursor-pointer' data-tip="invite a collaborator">
                             <Icon path={mdiAccountArrowDown} size={3/4}  />
                         </a>
                     </td>
-                    <NewCollaborator  active={activeNewCollaboratorModal} setActive={setActiveNewCollaboratorModal} projectId={value.id} />
                 </tr>
-            )        
-            }
+            )   }
+            <SetProjectModal active={activeSetProject} setActive={SetActiveSetProject} />
+            <NewCollaborator  active={activeNewCollaboratorModal} setActive={setActiveNewCollaboratorModal}  />
+
             </tbody>            
-        </table>
+        </table> : 
+        <div className='w-full  flex items-center justify-center my-6'>
+            <Loader />
+        </div>}
     </div>
 
   )

@@ -1,9 +1,10 @@
 export interface  NotificationInterface  {
-    created_at: Date
-    updated_at? : Date|null
+    created_at : string
     id: number,
-    message: string
-    type: string,
-    status : number
+    notifiable_contentt_id :  string|number
+    status :  number
+    type : string,
+    updated_at : string,
+    user_id : number
 } 
 
