@@ -30,7 +30,7 @@ export default function NotificationInvitation({notification} : { notification: 
               <img alt="Tailwind CSS Navbar component"  src={defaultImage} />
             </div>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col items-center justify-center'>
             <p className='text-sm'> 
             You have successfully invited 
             <strong> {invitation.receiver.username} </strong>

@@ -16,7 +16,7 @@ export default function NewCollaborator({active, setActive} : {active : boolean,
   const navigate = useNavigate();
   const location = useLocation();
   const href  = searchParams.get('href');
-  const projectId = href ? AES.decrypt(href, 'newCollab243-').toString(enc.Utf8) : '';
+  const projectId = href ?  atob(href).split('-')[0] : '';
 
   useEffect(() => {
     if (active) {

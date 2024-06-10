@@ -7,6 +7,7 @@ const initialState = {
     errors : false,
     create_project_status : null,
     delete_project_status : null,
+    update_project_status : null,
     send_invitation_status : {
         user_id : null,
         project_id : null,
@@ -75,6 +76,15 @@ const  ProjectsReducer = (state = initialState, action : ActionInterface) => {
     case ProjectActions.INIT_REFUSE_PROJECT_INVITATION : 
         return {...state, refuse_invitation_status : { uuid : null,status : null }
     }
+
+    case ProjectActions.UPDATE_PROJECTS_FAILED : 
+        return {...state, update_project_status : false }
+
+    case ProjectActions.UPDATE_PROJECTS_SUCESS : 
+        return {...state, update_project_status : true }
+
+    case ProjectActions.INIT_PROJECT_UPDATE_STATE : 
+        return {...state, update_project_status : null }
         
     default:
         return {...state};

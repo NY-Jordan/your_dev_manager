@@ -3,7 +3,7 @@ import ApiClient from "../../Application/Helpers/ApiClient";
 import secureLocalStorage from "react-secure-storage";
 import { SetStateAction, Dispatch } from "react";
 import { store } from "../../Application/Store/store";
-import { AcceptProjectInvitationFailed, AcceptProjectInvitationSucess, CreateProjectFailed, CreateProjectSucess, DeleteProjectFailed, DeleteProjectSucess, RefuseProjectInvitationFailed, RefuseProjectInvitationSucess, SearchUserProjectFailed, SearchUserProjectSucess, SendInvitationFailed, SendInvitationSucess, getProjectFailed, getProjectSucess } from "../../Application/Actions/ProjectActions";
+import { AcceptProjectInvitationFailed, AcceptProjectInvitationSucess, CreateProjectFailed, CreateProjectSucess, DeleteProjectFailed, DeleteProjectSucess, RefuseProjectInvitationFailed, RefuseProjectInvitationSucess, SearchUserProjectFailed, SearchUserProjectSucess, SendInvitationFailed, SendInvitationSucess, getProjectFailed, getProjectSucess, updateProjectFailed, updateProjectSuccess } from "../../Application/Actions/ProjectActions";
 import { ProjectInvitationInterface } from "../../Domain/Entities/project.entities";
 
 
@@ -43,12 +43,33 @@ export async function getAllProjects ()  {
            store.dispatch(getProjectSucess(data.projects, data.count));
        }   
    }).catch((e) => { 
-    console.log(e);
-    
+        console.log(e);
         store.dispatch(getProjectFailed('Somethings went wrong'));
    })   
    
 };
+
+
+export async function update (name : string, id : number) {
+    ApiClient().post('/project/update/'+id,  
+    {
+        name  : name
+    },
+   {
+        headers : {
+            Authorization : 'Bearer '+secureLocalStorage.getItem('token')
+        }
+   })
+   .then((response) => {
+       if (response.status === 200) {
+           store.dispatch(updateProjectSuccess());
+       }
+   }).catch((e) => { 
+        console.log(e);
+        store.dispatch(updateProjectFailed());
+   })   
+}
+
 
 export async function SearchUsers (search : string|number|null, projectId : number){
     ApiClient().get(('/project/search/'+projectId+'?search='+search),  

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { NotificationInterface } from '../../../../Domain/Entities/notifications.entities'
 import { ProjectInvitationInterface } from '../../../../Domain/Entities/project.entities'
 import { getProjectInvitation } from '../../../../Infrastructure/Services/ProjectService'
-import { getUserDetails } from '../../../../Infrastructure/Services/UserService'
-import { UserInterface } from '../../../../Domain/Entities/user.entities'
 
 
 const defaultImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3FoTTUAqf4eBIuMo4rE45GWh-TjwI66eSUA&usqp=CAU'
@@ -31,7 +29,7 @@ export default function NotificationInvitationAccepted({notification} : { notifi
               <img alt="Tailwind CSS Navbar component"  src={invitation.receiver.picture} />
             </div>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col items-center justify-center'>
             <p className='text-sm'> 
             <strong>{invitation.receiver.username} </strong>
              have accepted to join  <strong>{invitation.project.name} </strong> project

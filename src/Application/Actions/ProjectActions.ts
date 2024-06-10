@@ -6,6 +6,9 @@ export const  ProjectActions = {
     GET_PROJECTS_FAILED : "GET_PROJECTS_FAILED" ,
     CREATE_PROJECTS_FAILED : "CREATE_PROJECTS_FAILED" ,
     CREATE_PROJECTS_SUCESS : "CREATE_PROJECTS_SUCESS" ,
+    UPDATE_PROJECTS_SUCESS : "UPDATE_PROJECTS_SUCESS" ,
+    UPDATE_PROJECTS_FAILED : "UPDATE_PROJECTS_FAILED" ,
+    INIT_PROJECT_UPDATE_STATE : "INIT_PROJECT_UPDATE_STATE",
     SEARCH_USER_PROJECTS_FAILED : "SEARCH_USER_PROJECTS_FAILED" ,
     SEARCH_USER_PROJECTS_SUCESS : "SEARCH_USER_PROJECTS_SUCESS" ,
     SEND_INVITATION_SUCESS : "SEND_INVITATION_SUCESS",
@@ -114,14 +117,25 @@ export const RefuseProjectInvitationSucess = (uuid : string|number) => ({
 export const RefuseProjectInvitationFailed = () => ({
     type : ProjectActions.REFUSE_PROJECT_INVITATION_FAILED,
     payload : {error : true}
-})
+});
 
 export const inirefuseProjectInvitattionStatus = () => ({
     type : ProjectActions.INIT_REFUSE_PROJECT_INVITATION,
 })
 
 
+export const updateProjectSuccess  =  () => ({
+    type : ProjectActions.UPDATE_PROJECTS_SUCESS,
+    payload : {status : true}
+});
 
 
+export const updateProjectFailed  =  () => ({
+    type : ProjectActions.UPDATE_PROJECTS_FAILED,
+    payload : {status : false}
+});
 
 
+export const InitProjectUpdateState  =  () => ({
+    type : ProjectActions.INIT_PROJECT_UPDATE_STATE,
+});

@@ -1,12 +1,17 @@
 import { UserInterface } from "./user.entities"
 
+
+
+
+
 export interface  ProjectInterface  {
     created_at: Date
     delevry_at? : Date|null
     id: number,
     name: string
     updated_at: string
-    user_id: Number
+    user_id: Number,
+    access? : boolean
 } 
 
 export interface ProjectInvitationInterface {
