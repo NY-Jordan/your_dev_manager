@@ -24,7 +24,7 @@ export default function NotificationInvitation({notification} : { notification: 
     <>
     {
       invitation && <>
-          <div className='my-2 flex space-x-2 hover:bg-slate-200 p-2'>
+          <div className='my-2 flex space-x-2 hover:bg-slate-200 p-2 dark:bg-gray-900 rounded-md'>
           <div  className="btn btn-ghost btn-circle avatar w-18">
             <div className=" rounded-full">
               <img alt="Tailwind CSS Navbar component"  src={defaultImage} />

@@ -9,7 +9,8 @@ type props = {
     icon? : string,
     default?: boolean,
     goTo : string,
-    isSubMenu? : boolean
+    isSubMenu? : boolean,
+    onClick? : Function
   }
 
 export default function MenuItem(props : PropsWithChildren<props>) {
@@ -21,9 +22,10 @@ export default function MenuItem(props : PropsWithChildren<props>) {
   return (
     <NavLink
         to={props.goTo}
+        onClick={() => props.onClick ? props.onClick() : () => {}}
         className={({ isActive, isPending }) =>
           isActive
-            ? "bg-blue-200"
+            ? "bg-blue-200 dark:text-black dark:bg-gray-600"
             : isPending
             ? "pending"
             : ""
@@ -33,7 +35,7 @@ export default function MenuItem(props : PropsWithChildren<props>) {
                 transform  :  props.isSubMenu ? 'translate(20px)' :  'translate(0)'
               }}
               animate={{ width : props.status ? 2 :  "100%",  }} 
-              className={ 'hover:bg-gray-200 '+(props.status  ? 'rounded-full' : '')} >   
+              className={ 'hover:bg-gray-200 dark:hover:text-black dark:hover:bg-gray-600  dark:text-white '+(props.status  ? 'rounded-full' : '')} >   
                 <a >
                 {
                     props.icon && <Icon

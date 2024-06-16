@@ -51,7 +51,7 @@ export default function CollaboratorSearch({name, picture, projectId, userId} : 
     }, [SendInvitationStatus.status]); 
 
   return (
-       <a className=" flex justify-between my-4 hover:cursor-pointer  hover:bg-blue-100 py-2 rounded-sm p-1" >
+       <a className=" flex justify-between my-4 hover:cursor-pointer dark:hover:bg-slate-400  hover:bg-blue-100 py-2 rounded-sm p-1" >
         <div className='flex space-x-3'>
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
@@ -66,7 +66,7 @@ export default function CollaboratorSearch({name, picture, projectId, userId} : 
 
         <div>
             {loader ? <span className="loading loading-spinner loading-md"></span> :
-                <a href='#' onClick={SendInvitation}  className=' tooltip tooltip-left rounded-full hover:bg-slate-100 p-2' data-tip="send an invitation">
+                <a href='#' onClick={SendInvitation}  className='dark:hover:text-black tooltip tooltip-left rounded-full hover:bg-slate-100 p-2' data-tip="send an invitation">
                     <Icon path={mdiArrowRightTop} size={1}  />
             </a>}
         </div>

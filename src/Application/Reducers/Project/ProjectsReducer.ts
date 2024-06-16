@@ -39,6 +39,8 @@ const  ProjectsReducer = (state = initialState, action : ActionInterface) => {
 
     case ProjectActions.CREATE_PROJECTS_SUCESS : 
         return {...state,create_project_status : action.payload.failed}
+
+
         // send invitation
     case ProjectActions.SEND_INVITATION_SUCESS : 
         return {...state,send_invitation_status : { user_id : action.payload.user_id, project_id : action.payload.project_id, status : action.payload.status} }
@@ -49,12 +51,8 @@ const  ProjectsReducer = (state = initialState, action : ActionInterface) => {
     case ProjectActions.INIT_INVITATION_STATUS : 
         return {...state,send_invitation_status : { user_id : null, project_id : null,status : null} }
 
-    case ProjectActions.DELETE_PROJECT_SUCESS : 
-        return {...state, delete_project_status : true }
-
-    case ProjectActions.DELETE_PROJECT_FAILED : 
-        return {...state, delete_project_status : false }
-
+   
+    //accept project invitation
     case ProjectActions.ACCEPT_PROJECT_INVITATION_SUCESS : 
         return {...state, accept_invitation_status : {uuid : action.payload.uuid,status : true } }
 
@@ -66,6 +64,7 @@ const  ProjectsReducer = (state = initialState, action : ActionInterface) => {
         return {...state, accept_invitation_status : { uuid : null,status : null }
     }
 
+    //refuse project invitation
     case ProjectActions.REFUSE_PROJECT_INVITATION_SUCESS : 
         return {...state, refuse_invitation_status : {uuid : action.payload.uuid,status : true } }
 
@@ -77,6 +76,7 @@ const  ProjectsReducer = (state = initialState, action : ActionInterface) => {
         return {...state, refuse_invitation_status : { uuid : null,status : null }
     }
 
+    //Update project
     case ProjectActions.UPDATE_PROJECTS_FAILED : 
         return {...state, update_project_status : false }
 
@@ -85,6 +85,18 @@ const  ProjectsReducer = (state = initialState, action : ActionInterface) => {
 
     case ProjectActions.INIT_PROJECT_UPDATE_STATE : 
         return {...state, update_project_status : null }
+
+
+
+    //delete project
+    case ProjectActions.DELETE_PROJECTS_FAILED : 
+        return {...state, delete_project_status : false }
+
+    case ProjectActions.DELETE_PROJECTS_SUCESS : 
+        return {...state, delete_project_status : true }
+
+    case ProjectActions.INIT_PROJECT_DELETE_STATE : 
+        return {...state, delete_project_status : null }
         
     default:
         return {...state};

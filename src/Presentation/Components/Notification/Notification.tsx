@@ -19,7 +19,7 @@ export default function Notification({active} : {active : boolean}) {
     const notifications = notificationState.notifications?.data;
 
     return (
-    <div className={'absolute p-4 xl:w-[25%] sm:w-[50%] sm:left-[45%] md:w-[40%] md:left-[58%] xl:left-[74%]  h-[90%] z-40 top-[8%]  bg-white shadow-xl rounded-sm flex  items-start overflow-x-hidden '+(active ? 'block' : 'hidden')}>
+    <div className={'absolute p-4 xl:w-[25%] dark:bg-sky-950 dark:text-white sm:w-[50%] sm:left-[45%] md:w-[40%] md:left-[58%] xl:left-[74%]  h-[90%] z-40 top-[8%]  bg-white shadow-xl rounded-sm flex  items-start overflow-x-hidden '+(active ? 'block' : 'hidden')}>
     
     <div className='w-full flex flex-col'>
       <div className='text-2xl font-bold'>Notifications</div>

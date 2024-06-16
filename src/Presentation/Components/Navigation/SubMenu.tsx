@@ -21,16 +21,16 @@ export default function SubMenu(props : PropsWithChildren<props>) {
   return (
     <li>
         <details >
-          <summary  className='hover:bg-gray-200'>
+          <summary  className='hover:bg-gray-200  dark:hover:bg-gray-600 dark:text-white '>
           {
               props.icon && <Icon
               path={props.icon}
               size={1}
                />
             }
-            {props.title}
+            <span className='dark:text-white dark:hover:text-black'>{props.title}</span>
           </summary>
-          <ul>
+          <ul className=''>
           {props.children}
            
           </ul>

@@ -25,14 +25,14 @@ export default function DropDownMenuItem(props : PropsWithChildren<props>) {
   return (
       <li className={props.status ? 'dropdown dropdown-right' : ""}>
         <details >
-          <summary tabIndex={0}  className={'hover:bg-gray-200 '+(props.status ? 'p-2' : '')}>
+          <summary tabIndex={0}  className={'hover:bg-gray-200 dark:hover:text-black dark:hover:bg-gray-600 dark:text-white '+(props.status ? 'p-2' : '')}>
           {
               props.icon && <Icon
               path={props.icon}
               size={1}
                />
             }
-          <p style={{ display : props.status ? "none" : "block"}}>{props.title}</p>
+          <p className='dark:text-white' style={{ display : props.status ? "none" : "block"}}>{props.title}</p>
           </summary>
           <ul tabIndex={0} className={props.status ? "dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52": ""}>
           {props.children}

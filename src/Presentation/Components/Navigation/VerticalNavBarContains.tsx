@@ -6,20 +6,24 @@ import { mdiAccount, mdiBookOpenVariant, mdiCalendarBlankMultiple, mdiCodeTags, 
 import logo from './../../assets/img/logo.png'
 import { useAppSelector } from '../../../Application/Store/hook'
 import { ProjectInterface } from '../../../Domain/Entities/project.entities'
+import ProjectsMenu from './ProjectsMenu'
 export default function VerticalNavBarContains({widthNavBar} : {widthNavBar? : boolean}) {
     const withVerticalNav = widthNavBar ? widthNavBar : false;
     const projects = useAppSelector(state => state.projects).projects
+
+
+    
   return (
-    <ul className="menu px-0 rounded-box">
+    <ul className="menu px-0 rounded-box dark:bg-slate-800 dark:border-gray-800">
             
           <MenuItem title='Dashboard' goTo='/' icon={mdiAccount}   status={withVerticalNav} default={true} />
           <DropDownMenuItem title='My Projects'   icon={mdiBookOpenVariant}  status={withVerticalNav}>
+           
             {projects && projects.map((project : ProjectInterface,key : number) => {
-            return <SubMenu key={key} title={project.name}   status={withVerticalNav}>
-                <MenuItem title='Add group task'  goTo='/projects'  icon={mdiPlus}   status={false}  />
-                <MenuItem title='Authentification'  icon={mdiHandPointingRight}   goTo='/projects'   status={false}   isSubMenu={true}  />
-                <MenuItem title='gestion des utilisateurs'   icon={mdiHandPointingRight}  goTo='/projects'   status={false}  isSubMenu={true} />
-            </SubMenu>}) }
+            return  <ProjectsMenu  key={key} title={project.name}  project={project}   status={false}/>}) }
+
+{/* <SubMenu key={key} title={project.name}   status={withVerticalNav}>
+            </SubMenu> */}
            
            </DropDownMenuItem>
             

@@ -35,23 +35,23 @@ export default function NewCollaborator({active, setActive} : {active : boolean,
   return (  
     <>
       <input type="checkbox" id={"create_project_modal"}  checked={active} className="modal-toggle w-full" />
-        <dialog className="modal backdrop-blur-sm modal-top justify-center" role="dialog">
-          <div className="modal-box  rounded-lg   mt-4" style={{width : '800px'}}>
+        <dialog className="modal backdrop-blur-sm modal-top justify-center " role="dialog">
+          <div className="modal-box  rounded-lg   mt-4 dark:text-white dark:bg-slate-700 " style={{width : '800px'}}>
               <div className='flex justify-between'>
               <h3 className="font-bold text-lg">Invite a new collaborator on the Project</h3>
-              <a href='#'  onClick={() => handleClose()} className='hover:bg-gray-200 rounded-full'>
+              <a href='#'  onClick={() => handleClose()} className='hover:bg-gray-200 rounded-full dark:hover:text-black'>
                 <Icon path={mdiClose}  size={1}/>
               </a>
               </div>
               <p className="py-4">Tap the username or email of the user</p>
               <form method='post'  >
-                <label className="input input-bordered flex items-center gap-2 focus-within:outline-none w-full focus:border-blue-300">
+                <label className="input input-bordered  dark:bg-slate-700 flex items-center gap-2 focus-within:outline-none w-full focus:border-blue-300">
                   <Icon path={mdiMagnify} size={1} />
-                  <input className=' ' onChange={(e) => setSearch(e.target.value)}   />
+                  <input className=' dark:bg-slate-700' onChange={(e) => setSearch(e.target.value)}   />
                 </label>
-                <div className='border-gray-100 border-2 w-full my-4 p-2 rounded-md shadow-lg'>
-                  <div className='max-h-[300px] overflow-y-auto overflow-x-hidden'>
-                        {projectUserState.users ?
+                <div className='border-gray-100 border-2 w-full dark:border-slate-700 dark:bg-gray-700 my-4 p-2 rounded-md shadow-lg'>
+                  <div className='max-h-[300px] overflow-y-auto   overflow-x-hidden'>
+                        {projectUserState.users.length ?
                           projectUserState.users?.map((item : UserInterface, key : number) => {
                             return <CollaboratorSearch key={key} name={item.name} picture={item.picture} projectId={parseInt(projectId)} userId={item.id} />
                           })

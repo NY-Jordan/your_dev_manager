@@ -4,6 +4,7 @@ import AuthReducer from "../Reducers/Auth/AuthReducer";
 import ProjectsReducer from "../Reducers/Project/ProjectsReducer";
 import ProjectUserSearchReducer from "../Reducers/Project/ProjectUserSearchReducer";
 import NotificationReducer from "../Reducers/NotificationReducer";
+import GroupTaskReducer from "../Reducers/Project/GroupTaskReducer";
 
  const RootReducer = 
     combineReducers({
@@ -11,7 +12,8 @@ import NotificationReducer from "../Reducers/NotificationReducer";
         auth : AuthReducer,
         projects : ProjectsReducer,
         projectUserSearch : ProjectUserSearchReducer,
-        notifications : NotificationReducer
+        notifications : NotificationReducer,
+        GroupTasks : GroupTaskReducer
     });
 
 

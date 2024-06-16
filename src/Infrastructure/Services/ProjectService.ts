@@ -3,7 +3,7 @@ import ApiClient from "../../Application/Helpers/ApiClient";
 import secureLocalStorage from "react-secure-storage";
 import { SetStateAction, Dispatch } from "react";
 import { store } from "../../Application/Store/store";
-import { AcceptProjectInvitationFailed, AcceptProjectInvitationSucess, CreateProjectFailed, CreateProjectSucess, DeleteProjectFailed, DeleteProjectSucess, RefuseProjectInvitationFailed, RefuseProjectInvitationSucess, SearchUserProjectFailed, SearchUserProjectSucess, SendInvitationFailed, SendInvitationSucess, getProjectFailed, getProjectSucess, updateProjectFailed, updateProjectSuccess } from "../../Application/Actions/ProjectActions";
+import { AcceptProjectInvitationFailed, AcceptProjectInvitationSucess, CreateProjectFailed, CreateProjectSucess, RefuseProjectInvitationFailed, RefuseProjectInvitationSucess, SearchUserProjectFailed, SearchUserProjectSucess, SendInvitationFailed, SendInvitationSucess, deleteProjectFailed, deleteProjectSuccess, getProjectFailed, getProjectSucess, updateProjectFailed, updateProjectSuccess } from "../../Application/Actions/ProjectActions";
 import { ProjectInvitationInterface } from "../../Domain/Entities/project.entities";
 
 
@@ -156,11 +156,13 @@ export async function DeleteProjectService(projectId : number) {
         }
     }).then((response) => {
         const res = response.data;
-        if (response.status === 201) {
-            store.dispatch(DeleteProjectSucess());
+        if (response.status === 200) {
+            store.dispatch(deleteProjectSuccess());
         }   
     }).catch((e) => { 
-        store.dispatch(DeleteProjectFailed());
+        console.log(e);
+        
+        store.dispatch(deleteProjectFailed());
     }) 
 }
 

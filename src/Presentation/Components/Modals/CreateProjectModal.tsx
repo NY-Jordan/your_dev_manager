@@ -40,17 +40,17 @@ export default function CreateProjectModal({active, setActive} : {active : boole
   return (
     <>
       <input type="checkbox" id="create_project_modal"  checked={active} className="modal-toggle " />
-        <div className="modal backdrop-blur-sm" role="dialog">
-        <div className="modal-box modal-top">
+        <div className="modal backdrop-blur-sm dark:text-white dark:bg-slate-400" role="dialog">
+        <div className="modal-box modal-top dark:text-white dark:bg-slate-800">
             <div className='flex justify-between'>
             <h3 className="font-bold text-lg">Create a New Project</h3>
-            <a href='#'  onClick={() => setActive(false)} className='hover:bg-gray-200 rounded-full'>
+            <a href='#'  onClick={() => setActive(false)} className='hover:bg-gray-200  dark:hover:text-black rounded-full'>
               <Icon path={mdiClose}  size={1}/>
             </a>
             </div>
             <p className="py-4">Enter the name of the project</p>
             <form method='post'  onSubmit={handleSubmit(onSubmit)}>
-                <input  className={'input input-bordered w-full '+(errors.name ? 'input-secondary' : '')} placeholder="Project's Name" 
+                <input  className={'input dark:bg-gray-100 dark:text-white input-bordered w-full '+(errors.name ? 'input-secondary' : '')} placeholder="Project's Name" 
                 {...register("name", { required: true })}
                  />
                 <div className='flex justify-end mt-4'>

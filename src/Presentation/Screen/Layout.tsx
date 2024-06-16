@@ -26,7 +26,7 @@ export default function Layout() {
      {isDesktopOrLaptop && <VerticalNavBar   widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar} />}
       <motion.div  animate={{ width : isDesktopOrLaptop ?  ( widthNavBar ? "95%" :  '86%')  : "100%"}}  transition={{ delay: 0.01 }} >
         <NavBar  />
-        <div className='h-screen flex-1' style={{ overflowY  : "auto", overflowX : 'hidden' }}>
+        <div className='h-screen flex-1 dark:bg-slate-950' style={{ overflowY  : "auto", overflowX : 'hidden' }}>
              <Outlet />
         </div>
         <CustomToaster />

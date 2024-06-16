@@ -9,13 +9,14 @@ export const  ProjectActions = {
     UPDATE_PROJECTS_SUCESS : "UPDATE_PROJECTS_SUCESS" ,
     UPDATE_PROJECTS_FAILED : "UPDATE_PROJECTS_FAILED" ,
     INIT_PROJECT_UPDATE_STATE : "INIT_PROJECT_UPDATE_STATE",
+    INIT_PROJECT_DELETE_STATE : "INIT_PROJECT_DELETE_STATE",
+    DELETE_PROJECTS_SUCESS : "DELETE_PROJECTS_SUCESS" ,
+    DELETE_PROJECTS_FAILED : "DELETE_PROJECTS_FAILED" ,
     SEARCH_USER_PROJECTS_FAILED : "SEARCH_USER_PROJECTS_FAILED" ,
     SEARCH_USER_PROJECTS_SUCESS : "SEARCH_USER_PROJECTS_SUCESS" ,
     SEND_INVITATION_SUCESS : "SEND_INVITATION_SUCESS",
     SEND_INVITATION_FAILED : "SEND_INVITATION_FAILED",
     INIT_INVITATION_STATUS : "INIT_INVITATION_STATUS",
-    DELETE_PROJECT_SUCESS : "DELETE_PROJECT_SUCESS",
-    DELETE_PROJECT_FAILED : "DELETE_PROJECT_FAILED",
     ACCEPT_PROJECT_INVITATION_SUCESS :  "ACCEPT_PROJECT_INVITATION_SUCESS",
     ACCEPT_PROJECT_INVITATION_FAILED :  "ACCEPT_PROJECT_INVITATION_FAILED",
     INIT_PROJECT_INVITATION :  "INIT_PROJECT_INVITATION",
@@ -80,16 +81,6 @@ export const InitInvitationStatus = () => ({
 });
 
 
-export const DeleteProjectSucess = () => ({
-    type : ProjectActions.SEND_INVITATION_FAILED,
-    payload : {status : true}
-});
-
-
-export const DeleteProjectFailed = () => ({
-    type : ProjectActions.SEND_INVITATION_FAILED,
-    payload : {error : true}
-})
 
 
 export const AcceptProjectInvitationSucess = (uuid : string|number) => ({
@@ -138,4 +129,21 @@ export const updateProjectFailed  =  () => ({
 
 export const InitProjectUpdateState  =  () => ({
     type : ProjectActions.INIT_PROJECT_UPDATE_STATE,
+});
+
+
+export const deleteProjectSuccess  =  () => ({
+    type : ProjectActions.DELETE_PROJECTS_SUCESS,
+    payload : {status : true}
+});
+
+
+export const deleteProjectFailed  =  () => ({
+    type : ProjectActions.DELETE_PROJECTS_FAILED,
+    payload : {status : false}
+});
+
+
+export const InitProjectDeleteState  =  () => ({
+    type : ProjectActions.INIT_PROJECT_DELETE_STATE,
 });

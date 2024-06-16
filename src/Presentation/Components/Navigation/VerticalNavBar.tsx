@@ -15,7 +15,7 @@ type props  = {
 export default function VerticalNavBar({widthNavBar,setwidthNavBar} : props) {
  
   return (
-    <motion.div   animate={{width:  widthNavBar ? "5%" : "16%"  }}  className='px-2 h-screen bg-white flex flex-col items-left pt-20 overflow-y-auto no-scrollbar p-2 w-64 shadow-2xl  border-r-2 border-gray-400' >
+    <motion.div   animate={{width:  widthNavBar ? "5%" : "16%"  }}  className='px-2 h-screen dark:bg-slate-800 bg-white flex flex-col items-left pt-20 overflow-y-auto no-scrollbar p-2 w-64 shadow-2xl  border-r-2 dark:border-r-black  border-gray-400' >
         <ToggleVerticalNavBar  widthNavBar={widthNavBar} setwidthNavBar={setwidthNavBar}  /> 
           <VerticalNavBarContains widthNavBar={widthNavBar} />
     </motion.div>

@@ -6,9 +6,9 @@ import CardNote from '../CardNote'
 
 export default function NotesFilter() {
   return (
-    <div className='p-2 border-l-2 h-full border-gray-400 shadow-2xl' style={{ width : "100%"}}>
+    <div className='p-2 border-l-2 h-full dark:border-black border-t-2 border-gray-400 shadow-2xl' style={{ width : "100%"}}>
       <div className='mt-10 flex flex-col space-y-6' >
-       <div className='shadow-lg rounded-lg bg-blueGray-100 p-2'>
+       <div className='shadow-lg rounded-lg bg-blueGray-100 p-2 dark:bg-slate-950 dark:text-white pb-2'>
           <div >
             <div className='my-2'>Start Date</div>
             <input type='date' className='input  bg-gray-300 w-full' />
