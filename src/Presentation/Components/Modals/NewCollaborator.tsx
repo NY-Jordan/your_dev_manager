@@ -36,7 +36,7 @@ export default function NewCollaborator({active, setActive} : {active : boolean,
     <>
       <input type="checkbox" id={"create_project_modal"}  checked={active} className="modal-toggle w-full" />
         <dialog className="modal backdrop-blur-sm modal-top justify-center " role="dialog">
-          <div className="modal-box  rounded-lg   mt-4 dark:text-white dark:bg-slate-700 " style={{width : '800px'}}>
+          <div className="modal-box  rounded-lg   mt-4 dark:text-white dark:bg-slate-700 md:w-[700px] lg:w-[800px] " >
               <div className='flex justify-between'>
               <h3 className="font-bold text-lg">Invite a new collaborator on the Project</h3>
               <a href='#'  onClick={() => handleClose()} className='hover:bg-gray-200 rounded-full dark:hover:text-black'>

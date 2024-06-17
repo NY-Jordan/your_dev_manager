@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../Application/Store/hook'
 import toast from 'react-hot-toast'
 import { initGroupTaskState } from '../../../Application/Actions/GroupTaskActions'
 import { ProjectInterface } from '../../../Domain/Entities/project.entities'
+import ProjectMenuItem from './ProjectMenuItem'
 
 type props = {
   title : string, 
@@ -65,7 +66,7 @@ export default function ProjectsMenu(props : PropsWithChildren<props>) {
             {props.project.access && <MenuItem title='Add a  Group Tasks' onClick={() => setActiveAddGroupModal(true) }  goTo={'#'}   icon={mdiPlus}   status={false}  />}
             {
               groups && groups.map((group) => {
-                return  <MenuItem title={group.name} isSubMenu goTo={'/'+group.name}   icon={mdiHandPointingRight}   status={false}  />
+                return  <ProjectMenuItem type={group.status} title={group.name} isSubMenu goTo={'/'+group.name}   icon={mdiHandPointingRight}   status={false}  />
 
               })
             }

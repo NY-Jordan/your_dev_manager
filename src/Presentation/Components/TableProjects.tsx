@@ -1,4 +1,4 @@
-import { mdiAccount, mdiAccountArrowDown, mdiArrowRightTop, mdiArrowTopRight, mdiArrowUpLeft, mdiArrowUpRightBold, mdiDelete, mdiPencil, mdiTagEditOutline } from '@mdi/js'
+import { mdiAccount, mdiAccountArrowDown, mdiArrowRightTop, mdiArrowTopRight, mdiArrowUpLeft, mdiArrowUpRightBold, mdiCog, mdiDelete, mdiPencil, mdiTagEditOutline } from '@mdi/js'
 import Icon from '@mdi/react'
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../Application/Store/hook';
@@ -13,6 +13,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { AES } from 'crypto-js';
 import SetProjectModal from './Modals/SetProjectModal';
 import DeleteProjectModal from './Modals/DeleteProjectModal';
+import ProjectSettingsModal from './Modals/ProjectSettingsModal';
 
 
 export default function TableProjects() {
@@ -20,10 +21,10 @@ export default function TableProjects() {
     const [activeNewCollaboratorModal, setActiveNewCollaboratorModal] = useState<boolean>(false);
     const [activeSetProject, SetActiveSetProject] = useState<boolean>(false);
     const [activeDeleteProject, SetActiveDeleteProject] = useState<boolean>(false);
+    const [activeSettingsProject, setActiveSettingsProject] = useState<boolean>(false);
     const [projects, setProjects] = useState<Array<ProjectInterface>>([]);
     const navigate = useNavigate();
     const location  = useLocation();
-    let [searchParams, setSearchParams] = useSearchParams();
 
 
    
@@ -57,6 +58,12 @@ export default function TableProjects() {
         const key = btoa(projectId.toString()+'-deleteProject237');
         navigate(location.pathname+'?href='+key);
     }
+
+    const handleSettingsProject = (projectId : number) => { 
+        setActiveSettingsProject(true)
+        const key = btoa(projectId.toString()+'-settingsProject237');
+        navigate(location.pathname+'?href='+key);
+    }
     
   return (
     <div className="overflow-x-auto" style={{ width : "100%" }}>
@@ -88,8 +95,8 @@ export default function TableProjects() {
                             <Icon path={mdiPencil} size={3/4}  />
                         </a>
 
-                        <a href='#' className='tooltip rounded-full hover:bg-slate-100 p-2 dark:hover:text-black' data-tip="collaborators">
-                            <Icon path={mdiAccount} size={3/4}  />
+                        <a href='#' onClick={() => handleSettingsProject(project.id)} className='tooltip rounded-full hover:bg-slate-100 p-2 dark:hover:text-black' data-tip="Settings">
+                            <Icon path={mdiCog} size={3/4}  />
                         </a>
 
                         {project.access ?
@@ -105,6 +112,7 @@ export default function TableProjects() {
             <SetProjectModal active={activeSetProject} setActive={SetActiveSetProject} />
             <NewCollaborator  active={activeNewCollaboratorModal} setActive={setActiveNewCollaboratorModal}  />
             <DeleteProjectModal active={activeDeleteProject} setActive={SetActiveDeleteProject}  />
+            <ProjectSettingsModal active={activeSettingsProject} setActive={setActiveSettingsProject}  />
 
             </tbody>            
         </table> : 

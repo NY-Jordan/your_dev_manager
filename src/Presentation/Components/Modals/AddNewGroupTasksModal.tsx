@@ -11,9 +11,11 @@ import Loader from '../Loader/Loader'
 import { InitProjectUpdateState } from '../../../Application/Actions/ProjectActions'
 import { createGroupTasks } from '../../../Infrastructure/Services/GroupTasksService'
 import { initGroupTaskState } from '../../../Application/Actions/GroupTaskActions'
+import { GroupTaskStatusEnum } from '../../../Domain/Enums/GroupTaskStatusEnum'
 
 type Inputs = {
-  name: string
+  name: string,
+  status : number
 }
 
 export default function AddNewGroupTasksModal({active, setActive, projectId} : {active : boolean, setActive :   Dispatch<SetStateAction<boolean>>, projectId : number}) {
@@ -29,7 +31,7 @@ export default function AddNewGroupTasksModal({active, setActive, projectId} : {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setLoader(true);
-        createGroupTasks(projectId, data.name)
+        createGroupTasks(projectId, data.name, data.status)
     }
 
     useEffect(() => {
@@ -49,11 +51,23 @@ export default function AddNewGroupTasksModal({active, setActive, projectId} : {
                 </div>
                 <p className="py-4">Group's Name</p>
                 <form method='post'  onSubmit={handleSubmit(onSubmit)}>
+                   <div>
                     <input    className={'input input-bordered dark:bg-slate-600 w-full '+(errors.name ? 'input-secondary' : '')} placeholder="Group's Name" 
-                    {...register("name", { 
-                    required: true ,
-                    })}
-                    /> 
+                        {...register("name", { 
+                        required: true ,
+                        })}
+                        /> 
+                   </div>
+                    <div className='my-8'>
+                        <select className='select dark:bg-slate-600 w-full ' 
+                        {...register('status',{
+                            required: true ,
+                        })}>
+
+                            <option className='dark:text-white text-md' value={GroupTaskStatusEnum.public}>Public</option>
+                            <option value={GroupTaskStatusEnum.private}>Private</option>
+                        </select>
+                    </div>
                     <div className='flex justify-end mt-4'>
                     <button className='btn btn-primary w-ful'>
                     {

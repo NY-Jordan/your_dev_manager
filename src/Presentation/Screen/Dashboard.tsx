@@ -8,6 +8,7 @@ import Icon from '@mdi/react';
 import { mdiPlus } from '@mdi/js';
 import { useResponsive } from '../../Application/Hooks/useResponsive';
 import CreateProjectModal from '../Components/Modals/CreateProjectModal';
+import { useAppSelector } from '../../Application/Store/hook';
 
 
 
@@ -15,6 +16,8 @@ import CreateProjectModal from '../Components/Modals/CreateProjectModal';
 export default function Dashboard() {
   const {isTabletOrMobile, isSM} = useResponsive();
   const [activeCreateProjectModal, setActiveCreateProjectModal] = useState<boolean>(false);
+  const projectsState = useAppSelector(state => state.projects);
+
   return (
       
       <div className='px-10 dark:bg-slate-950' >
@@ -35,11 +38,11 @@ export default function Dashboard() {
           <div className='rounded-lg py-4 flex flex-col px-10 bg-white justify-center mb-10 dark:bg-slate-800 dark:text-white ' >
               <div className='mb-4 items-center  mt-2 justify-between flex space-x-6'>
                   <h3 className='text-2xl font-bold '>My Projects</h3>
-                  <div className='border-2 border-gray-300 p-1 text-md rounded-md'>03</div>
+                  <div className='border-2 border-gray-300 p-1 text-md rounded-md'>{projectsState.projects.length}</div>
               </div>
             <TableProjects />
           </div>
-          <div className={'flex items-center space-x-4 justify-center  content-center'+(isTabletOrMobile ? 'flex-col space-y-8' : "")}>
+          <div className={'flex lg:flex-row  flex-col mb-8 items-center space-x-4 justify-center  content-center'+(isTabletOrMobile ? 'flex-col space-y-8' : "")}>
             <div className=' border-2 p-2 rounded-lg bg-white dark:border-gray-800 dark:bg-slate-800 dark:text-white' style={{ width : isTabletOrMobile ? "100%" : "50%" }}>
                 <div className='mb-4 items-center  justify-between flex space-x-6'>
                   <h3 className='text-2xl font-bold '>Collaborators</h3>

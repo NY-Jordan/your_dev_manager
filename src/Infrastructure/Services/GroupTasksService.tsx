@@ -21,12 +21,13 @@ export async function getAllGroupTasks(projectId : number)  : Promise<Array<Grou
 }
 
 
-export async function createGroupTasks(projectId : number, name : string)  {
+export async function createGroupTasks(projectId : number, name : string, status : number)  {
     try {
         const response  = await ApiClient().post('/project/taskgroup/create',
         {
             name : name,
             project_id : projectId,
+            status : status
         },
         {
             headers : {
